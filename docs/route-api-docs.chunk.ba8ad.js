@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[2],{Nnb3:function(s,t,e){"use strict";e.r(t);var i=e("hosL"),n="apiDocs__eEp-M";t.default=function(){return Object(i.h)("iframe",{class:n,width:"100%",src:"https://jameslmilner.github.io/terra-draw/modules.html"})}}}]);
+//# sourceMappingURL=route-api-docs.chunk.ba8ad.js.map
