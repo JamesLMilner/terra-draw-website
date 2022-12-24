@@ -1,7 +1,7 @@
 import { h } from "preact";
 import { Link } from "preact-router/match";
 import style from "./style.css";
-import logo from "../../imgs/logo.png";
+import logo from "../../assets/imgs/logo.png";
 
 const Header = () => (
   <header class={style.header}>
