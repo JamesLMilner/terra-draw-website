@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "preact build --no-prerender --dest docs",
+    "build": "preact build --no-prerender --dest docs && echo 'terradraw.io' > docs/CNAME",
     "serve": "sirv build --cors --single",
     "dev": "preact watch",
     "lint": "eslint src",

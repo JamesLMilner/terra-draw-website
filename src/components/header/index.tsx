@@ -2,6 +2,7 @@ import { h } from "preact";
 import { Link } from "preact-router/match";
 import style from "./style.css";
 import logo from "../../assets/imgs/logo.png";
+import github from "../../assets/imgs/github.png";
 
 const Header = () => (
   <header class={style.header}>
@@ -18,7 +19,7 @@ const Header = () => (
     </div>
     <div class={style.github}>
       <a href="https://www.github.com/JamesLMilner/terra-draw">
-        <img src="./imgs/github.png" />
+        <img src={github} />
       </a>
     </div>
   </header>
