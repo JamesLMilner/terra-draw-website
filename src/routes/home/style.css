@@ -1,0 +1,84 @@
+.home {
+  height: calc(100vh - 70px);
+  width: 100%;
+  display: flex;
+}
+
+.map {
+  position: relative;
+  height: calc(100vh - 70px);
+  outline: none;
+  flex-grow: 1;
+}
+
+.tab,
+.tabActive {
+  cursor: pointer;
+  margin-right: 20px;
+}
+
+.tabActive {
+  text-decoration: underline;
+}
+
+.tabButtons {
+  width: 100%;
+  padding-left: 20px;
+  font-size: 20px;
+  margin-top: 10px;
+}
+
+.buttons {
+  position: relative;
+  top: 0;
+  z-index: 1000;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.expanded {
+  display: flex;
+  width: 500px;
+  transition: width 0.5s;
+}
+
+.collapsed {
+  display: flex;
+  width: 25px;
+  transition: width 0.5s;
+}
+
+.collapse {
+  cursor: pointer;
+  width: 25px;
+  border: 0;
+  background: #56565614;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.tabs {
+  width: 100%;
+  opacity: 1;
+  transition: opacity 0.1s;
+}
+
+.tabsHidden {
+  width: 0;
+  opacity: 0;
+  transition: opacity 0.1s;
+  display: none;
+}
+
+@media screen and (max-width: 900px) {
+  .expanded,
+  .collapsed {
+    display: none;
+  }
+
+  .buttons {
+    width: 85%;
+  }
+}

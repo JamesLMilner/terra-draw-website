@@ -1,0 +1,41 @@
+.button {
+  padding: 10px;
+  width: 125px;
+  background: #fdfdfd;
+  border: solid 1px #ebebeb;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 18px;
+  color: #565656;
+  margin: 5px;
+  border: solid 3px #565656;
+}
+
+.button:hover {
+  background: white;
+  border: solid 3px #222222;
+}
+
+.active {
+  color: #02cf87;
+  transition: color 0.5s;
+}
+
+.hiddenOnTouch {
+}
+
+@media screen and (max-width: 900px) {
+  .expanded,
+  .collapsed {
+    display: none;
+  }
+
+  .buttons {
+    width: 85%;
+  }
+
+  .hiddenOnMobile {
+    display: none;
+  }
+}

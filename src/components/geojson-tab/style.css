@@ -1,0 +1,12 @@
+.geojson {
+  resize: none;
+  width: 100%;
+  flex-grow: 1;
+  height: calc(100vh - 150px);
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  flex-grow: 1;
+}
