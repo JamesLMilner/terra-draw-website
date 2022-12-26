@@ -2,11 +2,17 @@
   resize: none;
   width: 100%;
   flex-grow: 1;
-  height: calc(100vh - 150px);
+  height: calc(100vh - 190px);
 }
 
 .container {
   padding: 20px;
   display: flex;
   flex-grow: 1;
+  flex-direction: column;
+}
+
+.download {
+  padding: 10px;
+  font-weight: bold;
 }
