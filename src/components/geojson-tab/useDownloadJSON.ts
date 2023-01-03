@@ -4,11 +4,11 @@ export function useDownloadJSON() {
   const downloadJSON = useCallback(
     (json: Record<string, any>, filename: string) => {
       // Turn the JSON object into a string
-      const data = JSON.stringify(json);
+      const data = "hello world";
 
       // Pass the string to a Blob and turn it
       // into an ObjectURL
-      const blob = new Blob([data], { type: "application/json" });
+      const blob = new Blob([data], { type: "text/plain" });
       const jsonObjectUrl = URL.createObjectURL(blob);
 
       // Create an anchor element, set it's
@@ -17,7 +17,7 @@ export function useDownloadJSON() {
       // we want to set
       const anchorEl = document.createElement("a");
       anchorEl.href = jsonObjectUrl;
-      anchorEl.download = filename;
+      anchorEl.download = "example.txt";
 
       // There is no need to actually attach the DOM
       // element but we do need to click on it

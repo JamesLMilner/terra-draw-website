@@ -22,7 +22,7 @@
   transition: color 0.5s;
 }
 
-.hiddenOnTouch {
+.hiddenOnMobile {
 }
 
 @media screen and (max-width: 900px) {

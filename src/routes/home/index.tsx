@@ -10,10 +10,10 @@ import {
 import { setupDraw } from "./setup-draw";
 import { setupLeafletMap } from "./setup-leaflet";
 import * as L from "leaflet";
-import MapButton from "../../components/map-button";
 import InfoTab from "../../components/info-tab/InfoTab";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
+import { MapButtons } from "./MapButtons";
 
 const Home = () => {
   const mapOptions = {
@@ -64,43 +64,7 @@ const Home = () => {
   return (
     <div class={style.home}>
       <div ref={ref} class={style.map} id={mapOptions.id}>
-        {draw ? (
-          <div class={style.buttons}>
-            <MapButton
-              mode={"select"}
-              currentMode={mode}
-              changeMode={changeMode}
-            />
-            <MapButton
-              mode={"point"}
-              currentMode={mode}
-              changeMode={changeMode}
-            />
-            <MapButton
-              label={"Line"}
-              mode={"linestring"}
-              currentMode={mode}
-              changeMode={changeMode}
-            />
-            <MapButton
-              mode={"polygon"}
-              currentMode={mode}
-              changeMode={changeMode}
-            />
-            <MapButton
-              mode={"freehand"}
-              currentMode={mode}
-              changeMode={changeMode}
-              hiddenOnTouch={true}
-            />
-            <MapButton
-              mode={"circle"}
-              currentMode={mode}
-              changeMode={changeMode}
-              hiddenOnTouch={true}
-            />
-          </div>
-        ) : null}
+        {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
         <button
@@ -108,9 +72,11 @@ const Home = () => {
           onClick={() => {
             // Normally I would never suggest using this
             // approach but here there is a 500ms animation
-            setTimeout(() => {
-              map?.invalidateSize();
-            }, 500);
+            if (typeof window !== "undefined") {
+              setTimeout(() => {
+                map?.invalidateSize();
+              }, 500);
+            }
             setExpanded(!expanded);
           }}
         >
