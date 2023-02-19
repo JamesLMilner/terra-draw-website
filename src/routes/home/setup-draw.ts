@@ -8,6 +8,7 @@ import {
   TerraDrawCircleMode,
   TerraDrawFreehandMode,
   TerraDrawRenderMode,
+  TerraDrawGreatCircleMode,
 } from "terra-draw";
 import * as L from "leaflet";
 
@@ -69,6 +70,9 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
       linestring: new TerraDrawLineStringMode({
         snapping: true,
         allowSelfIntersections: false,
+      }),
+      greatcircle: new TerraDrawGreatCircleMode({
+        snapping: true,
       }),
       polygon: new TerraDrawPolygonMode({
         // snapping: true,

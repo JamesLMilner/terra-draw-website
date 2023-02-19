@@ -1,8 +1,8 @@
-import MapButton from "../../components/map-button";
+import MapButton from "../map-button/MapButton";
 import { h } from "preact";
 import style from "./style.css";
 
-export const MapButtons = ({
+const MapButtons = ({
   mode,
 
   changeMode,
@@ -20,6 +20,13 @@ export const MapButtons = ({
         currentMode={mode}
         changeMode={changeMode}
       />
+      <MapButton
+        label={"Flight Line "}
+        mode={"greatcircle"}
+        currentMode={mode}
+        changeMode={changeMode}
+        hiddenOnTouch={true}
+      />
       <MapButton mode={"polygon"} currentMode={mode} changeMode={changeMode} />
       <MapButton
         mode={"freehand"}
@@ -36,3 +43,5 @@ export const MapButtons = ({
     </div>
   );
 };
+
+export default MapButtons;

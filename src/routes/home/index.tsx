@@ -7,13 +7,13 @@ import {
   useState,
   useCallback,
 } from "preact/hooks";
+import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { setupDraw } from "./setup-draw";
 import { setupLeafletMap } from "./setup-leaflet";
 import * as L from "leaflet";
 import InfoTab from "../../components/info-tab/InfoTab";
-import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
-import { MapButtons } from "./MapButtons";
+import MapButtons from "../../components/map-buttons/MapButtons";
 
 const Home = () => {
   const mapOptions = {
@@ -47,7 +47,7 @@ const Home = () => {
     (newMode: string) => {
       if (draw) {
         setMode(newMode);
-        draw.changeMode(newMode);
+        draw.setMode(newMode);
       }
     },
     [draw]
