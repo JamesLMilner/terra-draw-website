@@ -1,6 +1,6 @@
 {
-  "name": "TerraDraw",
-  "short_name": "TerraDraw",
+  "name": "Terra Draw",
+  "short_name": "Terra Draw",
   "start_url": "/",
   "display": "standalone",
   "orientation": "portrait",
