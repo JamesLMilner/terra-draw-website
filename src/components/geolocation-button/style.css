@@ -1,0 +1,28 @@
+.button {
+  z-index: 100000000;
+  background: white;
+  color: black;
+  position: absolute;
+  top: 70px;
+  left: 12px;
+  width: 32px;
+  height: 32px;
+  margin-top: 10px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+}
+
+.button:hover {
+  background-color: #f4f4f4;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+
+.geolocation {
+  width: 18px;
+  height: 18px;
+}

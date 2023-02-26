@@ -14,14 +14,15 @@ import * as L from "leaflet";
 import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
+import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
 
 const Home = () => {
   const mapOptions = {
     L,
     id: "leaflet-map",
-    lng: -0.118092,
-    lat: 51.509865,
-    zoom: 12,
+    lng: 0,
+    lat: 30,
+    zoom: 1,
   };
   const ref = useRef(null);
   const [map, setMap] = useState<undefined | L.Map>();
@@ -64,6 +65,13 @@ const Home = () => {
   return (
     <div class={style.home}>
       <div ref={ref} class={style.map} id={mapOptions.id}>
+        {navigator.geolocation && draw ? (
+          <GeolocationButton
+            setLocation={(position) => {
+              map && map.setView([position[1], position[0]], 14);
+            }}
+          />
+        ) : null}
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
