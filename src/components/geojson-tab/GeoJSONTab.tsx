@@ -3,6 +3,7 @@ import style from "./style.css";
 import { useMemo } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { useDownloadJSON } from "./useDownloadJSON";
+import { fileDate } from "../../utils/dates";
 
 const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
   // Create a FeatureCollection when features changes
@@ -24,7 +25,7 @@ const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
 
   // Download to a file called terradraw.geojson
   const downloadGeoJSON = () =>
-    downloadJSON(featureCollection, "terradraw.geojson");
+    downloadJSON(featureCollection, `terradraw_${fileDate()}.geojson`);
 
   return (
     <div class={style.container}>
