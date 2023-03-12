@@ -6,6 +6,7 @@
     "build": "preact build --no-prerender --dest docs && echo 'terradraw.io' > docs/CNAME",
     "serve": "sirv build --cors --single",
     "dev": "preact watch --https",
+    "dev:http": "preact watch",
     "lint": "eslint src",
     "test": "jest"
   },
