@@ -1,4 +1,5 @@
 import * as leaflet from "leaflet";
+import * as protomaps from "protomaps";
 
 export function setupLeafletMap({
   L,
@@ -15,22 +16,17 @@ export function setupLeafletMap({
 }) {
   const leafletMap = L.map(id, {
     center: [lat, lng],
-    zoom: zoom + 1, // starting zoom
+    zoom: zoom, // starting zoom,
+    minZoom: 3,
+    maxZoom: 20,
+    tapTolerance: 25,
   });
 
-  L.tileLayer(
-    "https://stamen-tiles-{s}.a.ssl.fastly.net/terrain/{z}/{x}/{y}{r}.{ext}",
-    {
-      attribution:
-        'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-      subdomains: "abcd",
-      minZoom: 3,
-      maxZoom: 16,
-      ext: "png",
-    } as any
-  ).addTo(leafletMap);
-
-  console.log("loaded");
+  const PMTILES_KEY = "d23c43b7c56e123d";
+  var layer = protomaps.leafletLayer({
+    url: `https://api.protomaps.com/tiles/v2/{z}/{x}/{y}.pbf?key=${PMTILES_KEY}`,
+  });
+  layer.addTo(leafletMap);
 
   return leafletMap;
 }

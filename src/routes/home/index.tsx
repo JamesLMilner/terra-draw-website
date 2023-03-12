@@ -22,7 +22,7 @@ const Home = () => {
     id: "leaflet-map",
     lng: 0,
     lat: 30,
-    zoom: 1,
+    zoom: 3,
   };
   const ref = useRef(null);
   const [map, setMap] = useState<undefined | L.Map>();
