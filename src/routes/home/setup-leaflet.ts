@@ -19,7 +19,7 @@ export function setupLeafletMap({
     zoom: zoom, // starting zoom,
     minZoom: 3,
     maxZoom: 20,
-    tapTolerance: 25,
+    tapTolerance: 35,
   });
 
   const PMTILES_KEY = "d23c43b7c56e123d";
