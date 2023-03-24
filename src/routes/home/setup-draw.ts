@@ -77,6 +77,7 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
       polygon: new TerraDrawPolygonMode({
         // snapping: true,
         allowSelfIntersections: false,
+        pointerDistance: 30,
       }),
       circle: new TerraDrawCircleMode(),
       freehand: new TerraDrawFreehandMode(),
