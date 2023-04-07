@@ -32,8 +32,8 @@
     display: none;
   }
 
-  .buttons {
-    width: 85%;
+  .button {
+    padding: 9px;
   }
 
   .hiddenOnMobile {

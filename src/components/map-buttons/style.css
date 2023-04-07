@@ -11,5 +11,7 @@
 @media screen and (max-width: 900px) {
   .buttons {
     width: 85%;
+    margin: auto;
+    margin-left: 45px;
   }
 }
