@@ -15,6 +15,7 @@ import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
 import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
+import ClearButton from "../../components/clear-button/ClearButton";
 
 const Home = () => {
   const mapOptions = {
@@ -72,6 +73,7 @@ const Home = () => {
             }}
           />
         ) : null}
+        {draw ? <ClearButton draw={draw} /> : null}
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>

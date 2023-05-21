@@ -13,8 +13,6 @@ import {
 import * as L from "leaflet";
 
 export function setupDraw(map: L.Map, leaflet: typeof L) {
-  console.log(map);
-
   return new TerraDraw({
     adapter: new TerraDrawLeafletAdapter({
       lib: leaflet,
