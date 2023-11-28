@@ -5,8 +5,8 @@
   "scripts": {
     "build": "preact build --no-prerender --dest docs && echo 'terradraw.io' > docs/CNAME",
     "serve": "sirv build --cors --single",
-    "dev": "preact watch --https",
-    "dev:http": "preact watch",
+    "dev": "NODE_OPTIONS='--openssl-legacy-provider' preact watch --https",
+    "dev:http": "NODE_OPTIONS='--openssl-legacy-provider' preact watch",
     "lint": "eslint src",
     "test": "jest"
   },
@@ -31,7 +31,7 @@
     "preact-render-to-string": "^5.2.1",
     "preact-router": "^3.2.1",
     "protomaps": "^1.23.1",
-    "terra-draw": "0.0.1-alpha.38"
+    "terra-draw": "0.0.1-alpha.50"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.12",

@@ -19,8 +19,8 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
       map,
       coordinatePrecision: 9,
     }),
-    modes: {
-      select: new TerraDrawSelectMode({
+    modes: [
+      new TerraDrawSelectMode({
         flags: {
           arbitary: {
             feature: {},
@@ -64,28 +64,29 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
           },
         },
       }),
-      point: new TerraDrawPointMode(),
-      linestring: new TerraDrawLineStringMode({
+      new TerraDrawPointMode(),
+      new TerraDrawLineStringMode({
         snapping: true,
         allowSelfIntersections: false,
       }),
-      greatcircle: new TerraDrawGreatCircleMode({
+      new TerraDrawGreatCircleMode({
         snapping: true,
       }),
-      polygon: new TerraDrawPolygonMode({
+      new TerraDrawPolygonMode({
         // snapping: true,
         allowSelfIntersections: false,
         pointerDistance: 30,
       }),
-      circle: new TerraDrawCircleMode(),
-      freehand: new TerraDrawFreehandMode(),
-      arbitary: new TerraDrawRenderMode({
+      new TerraDrawCircleMode(),
+      new TerraDrawFreehandMode(),
+      new TerraDrawRenderMode({
+        modeName: 'arbitary',
         styles: {
           polygonFillColor: "#4357AD",
           polygonOutlineColor: "#48A9A6",
           polygonOutlineWidth: 2,
         },
       }),
-    },
+    ],
   });
 }
