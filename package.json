@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "preact build --no-prerender --dest docs && echo 'terradraw.io' > docs/CNAME",
+    "build": "NODE_OPTIONS='--openssl-legacy-provider' preact build --no-prerender --dest docs && echo 'terradraw.io' > docs/CNAME",
     "serve": "sirv build --cors --single",
     "dev": "NODE_OPTIONS='--openssl-legacy-provider' preact watch --https",
     "dev:http": "NODE_OPTIONS='--openssl-legacy-provider' preact watch",
@@ -31,7 +31,7 @@
     "preact-render-to-string": "^5.2.1",
     "preact-router": "^3.2.1",
     "protomaps": "^1.23.1",
-    "terra-draw": "0.0.1-alpha.50"
+    "terra-draw": "0.0.1-alpha.52"
   },
   "devDependencies": {
     "@types/enzyme": "^3.10.12",
