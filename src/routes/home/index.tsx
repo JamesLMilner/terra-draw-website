@@ -16,6 +16,7 @@ import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
 import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
 import ClearButton from "../../components/clear-button/ClearButton";
+import { localStorageStore } from "./store-local-storage";
 
 const Home = () => {
   const mapOptions = {
@@ -28,10 +29,23 @@ const Home = () => {
   const ref = useRef(null);
   const [map, setMap] = useState<undefined | L.Map>();
   const [mode, setMode] = useState<string>("static");
-  const [tab, setTab] = useState<"info" | "geojson">("info");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [selected, setSelected] = useState<GeoJSONStoreFeatures | undefined>();
   const [features, setFeatures] = useState<GeoJSONStoreFeatures[]>([]);
+  const [tab, setTabState] = useState<"info" | "geojson">(localStorage.getItem(
+    'tab') ? localStorage.getItem('tab') as 'info' | 'geojson' : "info"
+  );
+
+  const setTab = (newTab: 'info' | 'geojson') => {
+    setTabState(newTab);
+    localStorage.setItem('tab', newTab);
+  }
+
+  const {
+    clearLocalStorage,
+    setLocalStorage,
+    getLocalStorage
+  } = localStorageStore();
 
   useEffect(() => {
     setMap(setupLeafletMap(mapOptions));
@@ -56,11 +70,21 @@ const Home = () => {
   );
 
   useEffect(() => {
-    draw?.on("change", () => {
-      const snapshot = draw.getSnapshot();
-      setFeatures(snapshot);
-      setSelected(snapshot.find((f) => f.properties.selected));
-    });
+    if (draw) {
+      draw.on("change", () => {
+        const snapshot = draw.getSnapshot();
+        setFeatures(snapshot);
+        setSelected(snapshot.find((f) => f.properties.selected));
+        setLocalStorage(snapshot);
+      });
+
+      const snapshot = getLocalStorage()
+      if (snapshot) {
+        const parsed = JSON.parse(snapshot);
+        draw.addFeatures(parsed);
+      }
+    }
+
   }, [draw]);
 
   return (
@@ -73,7 +97,7 @@ const Home = () => {
             }}
           />
         ) : null}
-        {draw ? <ClearButton draw={draw} /> : null}
+        {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} /> : null}
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>

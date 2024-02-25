@@ -13,6 +13,7 @@ const GeolocationButton = ({
     <button
       id="geolocation"
       class={classes}
+      title={"Geolocation"}
       onClick={() => {
         console.log("clicked", navigator.geolocation);
         navigator.geolocation.getCurrentPosition(

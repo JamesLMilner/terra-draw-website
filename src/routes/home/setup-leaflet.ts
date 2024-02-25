@@ -1,5 +1,5 @@
 import * as leaflet from "leaflet";
-import * as protomaps from "protomaps";
+import * as protomaps from "protomaps-leaflet";
 
 export function setupLeafletMap({
   L,
@@ -23,9 +23,11 @@ export function setupLeafletMap({
   });
 
   const PMTILES_KEY = "d23c43b7c56e123d";
-  var layer = protomaps.leafletLayer({
-    url: `https://api.protomaps.com/tiles/v2/{z}/{x}/{y}.pbf?key=${PMTILES_KEY}`,
+  const layer: any = protomaps.leafletLayer({
+    url: `https://api.protomaps.com/tiles/v3/{z}/{x}/{y}.mvt?key=${PMTILES_KEY}`,
+    theme: "white"
   });
+
   layer.addTo(leafletMap);
 
   return leafletMap;

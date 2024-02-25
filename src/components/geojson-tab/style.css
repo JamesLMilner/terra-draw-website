@@ -2,7 +2,6 @@
   resize: none;
   width: 100%;
   flex-grow: 1;
-  height: calc(100vh - 193px);
   /** accomidate the 3px margin top for the download button **/
 }
 

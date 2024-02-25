@@ -27,13 +27,20 @@ const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
   const downloadGeoJSON = () =>
     downloadJSON(featureCollection, `terradraw_${fileDate()}.geojson`);
 
+  const copyGeoJSON = () => {
+    navigator.clipboard && navigator.clipboard.writeText(featureCollectionString);
+  }
+
   return (
     <div class={style.container}>
       <textarea class={style.geojson} readonly>
         {featureCollectionString}
       </textarea>
+      {navigator.clipboard ? <button class={style.download} onClick={copyGeoJSON}>
+        Copy
+      </button> : null}
       <button class={style.download} onClick={downloadGeoJSON}>
-        Download GeoJSON
+        Download
       </button>
     </div>
   );
