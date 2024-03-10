@@ -17,6 +17,7 @@ import MapButtons from "../../components/map-buttons/MapButtons";
 import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
 import ClearButton from "../../components/clear-button/ClearButton";
 import { localStorageStore } from "./store-local-storage";
+import { stripSnapshot } from "./strip-snapshot";
 
 const Home = () => {
   const mapOptions = {
@@ -75,7 +76,7 @@ const Home = () => {
         const snapshot = draw.getSnapshot();
         setFeatures(snapshot);
         setSelected(snapshot.find((f) => f.properties.selected));
-        setLocalStorage(snapshot);
+        setLocalStorage(stripSnapshot(snapshot));
       });
 
       const snapshot = getLocalStorage()
