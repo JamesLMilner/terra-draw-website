@@ -9,6 +9,7 @@ import {
   TerraDrawFreehandMode,
   TerraDrawRenderMode,
   TerraDrawGreatCircleMode,
+  ValidateNotSelfIntersecting,
 } from "terra-draw";
 import * as L from "leaflet";
 
@@ -67,15 +68,25 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
       new TerraDrawPointMode(),
       new TerraDrawLineStringMode({
         snapping: true,
-        allowSelfIntersections: false,
+        validation: (feature, { updateType }) => {
+          if (updateType === "finish" || updateType === "commit") {
+            return ValidateNotSelfIntersecting(feature);
+          }
+          return true
+        }
       }),
       new TerraDrawGreatCircleMode({
         snapping: true,
       }),
       new TerraDrawPolygonMode({
         // snapping: true,
-        allowSelfIntersections: false,
         pointerDistance: 30,
+        validation: (feature, { updateType }) => {
+          if (updateType === "finish" || updateType === "commit") {
+            return ValidateNotSelfIntersecting(feature);
+          }
+          return true
+        }
       }),
       new TerraDrawCircleMode(),
       new TerraDrawFreehandMode(),
