@@ -16,7 +16,7 @@ import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
 import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
 import ClearButton from "../../components/clear-button/ClearButton";
-import { localStorageStore } from "./store-local-storage";
+import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
 
 const Home = () => {
@@ -46,7 +46,7 @@ const Home = () => {
     clearLocalStorage,
     setLocalStorage,
     getLocalStorage
-  } = localStorageStore();
+  } = useLocalStorageStore();
 
   useEffect(() => {
     setMap(setupLeafletMap(mapOptions));
@@ -86,7 +86,7 @@ const Home = () => {
       }
     }
 
-  }, [draw]);
+  }, [getLocalStorage, setLocalStorage, draw]);
 
   return (
     <div class={style.home}>

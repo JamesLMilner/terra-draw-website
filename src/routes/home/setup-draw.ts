@@ -7,9 +7,8 @@ import {
   TerraDrawPolygonMode,
   TerraDrawCircleMode,
   TerraDrawFreehandMode,
-  TerraDrawRenderMode,
-  TerraDrawGreatCircleMode,
   ValidateNotSelfIntersecting,
+  TerraDrawRectangleMode,
 } from "terra-draw";
 import * as L from "leaflet";
 
@@ -58,6 +57,14 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
               draggable: true,
             },
           },
+          rectangle: {
+            feature: {
+              draggable: true,
+              coordinates: {
+                resizable: 'opposite-web-mercator'
+              }
+            }
+          },
           freehand: {
             feature: {
               draggable: true,
@@ -75,9 +82,7 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
           return true
         }
       }),
-      new TerraDrawGreatCircleMode({
-        snapping: true,
-      }),
+      new TerraDrawRectangleMode(),
       new TerraDrawPolygonMode({
         // snapping: true,
         pointerDistance: 30,
@@ -89,14 +94,10 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
         }
       }),
       new TerraDrawCircleMode(),
-      new TerraDrawFreehandMode(),
-      new TerraDrawRenderMode({
-        modeName: 'arbitary',
-        styles: {
-          polygonFillColor: "#4357AD",
-          polygonOutlineColor: "#48A9A6",
-          polygonOutlineWidth: 2,
-        },
+      new TerraDrawFreehandMode({
+        validation: (feature) => {
+          return ValidateNotSelfIntersecting(feature);
+        }
       }),
     ],
   });

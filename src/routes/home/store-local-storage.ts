@@ -1,7 +1,7 @@
 import { useCallback } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw";
 
-export function localStorageStore() {
+export function useLocalStorageStore() {
     const clearLocalStorage = useCallback(() => {
         if (localStorage) {
             localStorage.removeItem("terra-draw");

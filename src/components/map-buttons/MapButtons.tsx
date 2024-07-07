@@ -21,8 +21,8 @@ const MapButtons = ({
         changeMode={changeMode}
       />
       <MapButton
-        label={"Flight Line "}
-        mode={"greatcircle"}
+        label={"Rectangle"}
+        mode={"rectangle"}
         currentMode={mode}
         changeMode={changeMode}
         hiddenOnTouch={true}

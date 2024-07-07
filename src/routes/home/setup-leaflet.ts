@@ -16,7 +16,7 @@ export function setupLeafletMap({
 }) {
   const leafletMap = L.map(id, {
     center: [lat, lng],
-    zoom: zoom, // starting zoom,
+    zoom, // starting zoom,
     minZoom: 3,
     maxZoom: 20,
     tapTolerance: 10,
