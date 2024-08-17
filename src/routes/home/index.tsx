@@ -36,6 +36,7 @@ const Home = () => {
   const [tab, setTabState] = useState<"info" | "geojson">(localStorage.getItem(
     'tab') ? localStorage.getItem('tab') as 'info' | 'geojson' : "info"
   );
+  const [format, setFormat] = useState<'geojson' | 'fgb'>('geojson');
 
   const setTab = (newTab: 'info' | 'geojson') => {
     setTabState(newTab);
@@ -120,23 +121,23 @@ const Home = () => {
         <div class={expanded ? style.tabs : style.tabsHidden}>
           <div class={style.tabButtons}>
             <span
-              class={tab === "info" ? style.tabActive : style.tab}
-              onClick={() => setTab("info")}
-            >
-              Info
-            </span>
-            <span
               class={tab === "geojson" ? style.tabActive : style.tab}
               onClick={() => setTab("geojson")}
             >
               GeoJSON
+            </span>
+            <span
+              class={tab === "info" ? style.tabActive : style.tab}
+              onClick={() => setTab("info")}
+            >
+              Info
             </span>
           </div>
 
           {tab === "info" ? (
             <InfoTab selected={selected} features={features} />
           ) : (
-            <GeoJSONTab features={features} />
+            <GeoJSONTab features={features} format={format} setFormat={(newFormat: 'geojson' | 'fgb') => setFormat(newFormat)} />
           )}
         </div>
       </div>

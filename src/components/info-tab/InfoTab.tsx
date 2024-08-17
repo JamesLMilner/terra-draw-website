@@ -63,13 +63,13 @@ const InfoTab = ({
         </span>
         <span class={style.row}>
           <span class={style.type}>Created</span>
-          {selected
+          {selected && selected.properties.createdAt
             ? getHHMMSS(selected.properties.createdAt as number)
             : "N/A"}
         </span>
         <span class={style.row}>
           <span class={style.type}>Updated</span>
-          {selected
+          {selected && selected.properties.updatedAt
             ? getHHMMSS(selected.properties.updatedAt as number)
             : "N/A"}
         </span>
@@ -78,8 +78,8 @@ const InfoTab = ({
           {selected && selected.geometry.type === "Polygon"
             ? selected.geometry.coordinates[0].length
             : selected && selected.geometry.type === "LineString"
-            ? selected.geometry.coordinates.length
-            : "N/A"}
+              ? selected.geometry.coordinates.length
+              : "N/A"}
         </span>
         <span class={style.row}>
           <span class={style.type}>Area (m2)</span>

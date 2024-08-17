@@ -2,16 +2,18 @@ import { h } from "preact";
 import style from "./style.css";
 import { useMemo } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
-import { useDownloadJSON } from "./useDownloadJSON";
 import { fileDate } from "../../utils/dates";
+import { useDownloadFlatGeoBuf } from "./useDownloadFlatGeoBuf";
+import { FeatureCollection } from "geojson";
+import { useDownloadJSON } from "./useDownloadJSON";
 
-const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
+const GeoJSONTab = ({ features, format, setFormat }: { features: GeoJSONStoreFeatures[], format: 'geojson' | 'fgb', setFormat: (format: 'geojson' | 'fgb') => void }) => {
   // Create a FeatureCollection when features changes
   const featureCollection = useMemo(
     () => ({
       type: "FeatureCollection",
       features,
-    }),
+    } as FeatureCollection),
     [features]
   );
 
@@ -22,10 +24,12 @@ const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
   }, [featureCollection]);
 
   const downloadJSON = useDownloadJSON();
+  const downloadFlatGeoBuf = useDownloadFlatGeoBuf();
 
   // Download to a file called terradraw.geojson
-  const downloadGeoJSON = () =>
-    downloadJSON(featureCollection, `terradraw_${fileDate()}.geojson`);
+  const downloadGeoJSON = () => format === 'geojson' ?
+    downloadJSON(featureCollection, `terradraw_${fileDate()}.geojson`) :
+    downloadFlatGeoBuf(featureCollection, `terradraw_${fileDate()}.fgb`);
 
   const copyGeoJSON = () => {
     navigator.clipboard && navigator.clipboard.writeText(featureCollectionString);
@@ -36,12 +40,21 @@ const GeoJSONTab = ({ features }: { features: GeoJSONStoreFeatures[] }) => {
       <textarea class={style.geojson} readonly>
         {featureCollectionString}
       </textarea>
-      {navigator.clipboard ? <button class={style.download} onClick={copyGeoJSON}>
+      {navigator.clipboard ? <button class={style.copy} onClick={copyGeoJSON}>
         Copy
       </button> : null}
-      <button class={style.download} onClick={downloadGeoJSON}>
-        Download
-      </button>
+      <div class={style.downloadContainer}>
+        <button class={style.download} onClick={downloadGeoJSON}>
+          Download
+        </button>
+        <select class={style.formatSelect} onChange={(event) => {
+          setFormat(event.currentTarget.value as 'geojson' | 'fgb')
+        }}>
+          <option value="geojson">GeoJSON</option>
+          <option value="flatgeobuf">FlatGeobuf</option>
+        </select>
+      </div>
+
     </div>
   );
 };
