@@ -6,7 +6,6 @@ export function useDownloadFlatGeoBuf() {
     async (json: FeatureCollection, filename: string) => {
 
       import("flatgeobuf/lib/mjs/geojson").then(({ serialize }) => {
-
         // Turn the JSON object into a string
         // const data = JSON.stringify(json, null, 4);
 
