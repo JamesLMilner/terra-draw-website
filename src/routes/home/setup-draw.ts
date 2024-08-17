@@ -14,6 +14,7 @@ import * as L from "leaflet";
 
 export function setupDraw(map: L.Map, leaflet: typeof L) {
   return new TerraDraw({
+    tracked: true,
     adapter: new TerraDrawLeafletAdapter({
       lib: leaflet,
       map,
@@ -61,7 +62,7 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
             feature: {
               draggable: true,
               coordinates: {
-                resizable: 'opposite-web-mercator'
+                resizable: 'opposite'
               }
             }
           },
@@ -95,6 +96,7 @@ export function setupDraw(map: L.Map, leaflet: typeof L) {
       }),
       new TerraDrawCircleMode(),
       new TerraDrawFreehandMode({
+        pointerDistance: 5,
         validation: (feature) => {
           return ValidateNotSelfIntersecting(feature);
         }
