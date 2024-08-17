@@ -1,12 +1,12 @@
 .button {
-  padding: 10px;
-  width: 115px;
+  padding: 6px;
+  width: 100px;
   background: #fdfdfd;
   border: solid 1px #ebebeb;
   cursor: pointer;
   border-radius: 10px;
   font-weight: bold;
-  font-size: 16px;
+  font-size: 14px;
   color: #565656;
   margin: 4px;
   margin-top: 8px;
@@ -23,10 +23,10 @@
   transition: color 0.5s;
 }
 
-.hiddenOnMobile {
-}
+.hiddenOnMobile {}
 
 @media screen and (max-width: 900px) {
+
   .expanded,
   .collapsed {
     display: none;
