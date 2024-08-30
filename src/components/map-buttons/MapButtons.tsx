@@ -1,6 +1,6 @@
 import MapButton from "../map-button/MapButton";
 import { h } from "preact";
-import style from "./style.css";
+import style from "./style.module.css";
 
 const MapButtons = ({
   mode,

@@ -1,5 +1,5 @@
 import { h } from "preact";
-import style from "./style.css";
+import style from "./style.module.css";
 import geolocation from "../../assets/imgs/geolocation.png";
 
 const GeolocationButton = ({
