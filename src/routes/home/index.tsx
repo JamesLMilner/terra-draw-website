@@ -1,5 +1,6 @@
 import { h } from "preact";
 import style from "./style.module.css";
+import "maplibre-gl/dist/maplibre-gl.css";
 import {
   useMemo,
   useRef,
@@ -7,10 +8,10 @@ import {
   useState,
   useCallback,
 } from "preact/hooks";
+import maplibregl from "maplibre-gl";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { setupDraw } from "./setup-draw";
-import { setupLeafletMap } from "./setup-leaflet";
-import * as L from "leaflet";
+import { setupMaplibreMap } from "./setup-maplibre";
 import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
@@ -21,14 +22,13 @@ import { stripSnapshot } from "./strip-snapshot";
 
 const Home = () => {
   const mapOptions = {
-    L,
-    id: "leaflet-map",
+    id: "maplibre-map",
     lng: 0,
     lat: 30,
     zoom: 3,
   };
   const ref = useRef(null);
-  const [map, setMap] = useState<undefined | L.Map>();
+  const [map, setMap] = useState<undefined | maplibregl.Map>();
   const [mode, setMode] = useState<string>("static");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [selected, setSelected] = useState<GeoJSONStoreFeatures | undefined>();
@@ -50,12 +50,12 @@ const Home = () => {
   } = useLocalStorageStore();
 
   useEffect(() => {
-    setMap(setupLeafletMap(mapOptions));
+    setMap(setupMaplibreMap(mapOptions));
   }, []);
 
   const draw = useMemo(() => {
     if (map) {
-      const terraDraw = setupDraw(map, L);
+      const terraDraw = setupDraw(map, maplibregl);
       terraDraw.start();
       return terraDraw;
     }
@@ -95,7 +95,7 @@ const Home = () => {
         {navigator.geolocation && draw ? (
           <GeolocationButton
             setLocation={(position) => {
-              map && map.setView([position[1], position[0]], 14);
+              map && map.flyTo({center: {lng:position[0], lat:position[1]}, zoom:14, animate: false});
             }}
           />
         ) : null}
@@ -106,13 +106,6 @@ const Home = () => {
         <button
           class={style.collapse}
           onClick={() => {
-            // Normally I would never suggest using this
-            // approach but here there is a 500ms animation
-            if (typeof window !== "undefined") {
-              setTimeout(() => {
-                map?.invalidateSize();
-              }, 500);
-            }
             setExpanded(!expanded);
           }}
         >
