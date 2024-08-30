@@ -7,7 +7,7 @@ const GeolocationButton = ({
 }: {
   setLocation: (position: [number, number]) => void;
 }) => {
-  let classes = style.button;
+  const classes = style.button;
 
   return (
     <button

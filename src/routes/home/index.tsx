@@ -59,7 +59,7 @@ const Home = () => {
 
   const draw = useMemo(() => {
     if (map) {
-      const terraDraw = setupDraw(map, maplibregl);
+      const terraDraw = setupDraw(map);
       terraDraw.start();
       return terraDraw;
     }
@@ -99,7 +99,7 @@ const Home = () => {
         {navigator.geolocation && draw ? (
           <GeolocationButton
             setLocation={(position) => {
-              map && map.flyTo({center: {lng:position[0], lat:position[1]}, zoom:14, animate: false});
+              map && map.flyTo({ center: { lng: position[0], lat: position[1] }, zoom: 14, animate: false });
             }}
           />
         ) : null}
