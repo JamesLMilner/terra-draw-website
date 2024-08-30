@@ -4,7 +4,7 @@ import clear from "../../assets/imgs/clear.png";
 import { TerraDraw } from "terra-draw";
 
 const ClearButton = ({ draw, clearLocalStorage }: { draw: TerraDraw, clearLocalStorage: () => void }) => {
-  let classes = style.button;
+  const classes = style.button;
 
   return (
     <button

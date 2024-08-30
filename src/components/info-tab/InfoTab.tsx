@@ -55,7 +55,7 @@ const InfoTab = ({
         <h3 class={style.header}> Selected Feature </h3>
         <span class={style.row}>
           <span class={style.type}>ID</span>
-          {selected ? (selected.id as string).slice(0, 8) + "..." : "N/A"}
+          {selected ? `${(selected.id as string).slice(0, 8)}...` : "N/A"}
         </span>
         <span class={style.row}>
           <span class={style.type}>Geometry Type</span>
