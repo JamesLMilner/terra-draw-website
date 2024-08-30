@@ -50,7 +50,10 @@ const Home = () => {
   } = useLocalStorageStore();
 
   useEffect(() => {
-    setMap(setupMaplibreMap(mapOptions));
+    const maplibreMap = setupMaplibreMap(mapOptions);
+    maplibreMap.on("load", () => {
+      setMap(maplibreMap);
+    });
   }, []);
 
   const draw = useMemo(() => {
