@@ -12,12 +12,12 @@ import {
 } from "terra-draw";
 import maplibregl from "maplibre-gl";
 
-export function setupDraw(map: maplibregl.Map, ml: typeof maplibregl) {
+export function setupDraw(map: maplibregl.Map) {
   return new TerraDraw({
     tracked: true,
     adapter: new TerraDrawMapLibreGLAdapter({
-      map: map,
-      maplibregl: ml,
+      map,
+      maplibregl,
       coordinatePrecision: 9,
     }),
     modes: [

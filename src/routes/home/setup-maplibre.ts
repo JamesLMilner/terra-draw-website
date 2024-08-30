@@ -22,7 +22,7 @@ export function setupMaplibreMap({
   return new maplibregl.Map({
     container: id,
     style: `https://api.protomaps.com/styles/v3/white.json?key=${PROTOMAPS_API_KEY}`,
-    center: { lat: lat, lng: lng },
-    zoom: zoom,
+    center: { lat, lng },
+    zoom,
   });
 }

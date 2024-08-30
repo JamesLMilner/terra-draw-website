@@ -20,13 +20,14 @@ import ClearButton from "../../components/clear-button/ClearButton";
 import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
 
+const mapOptions = {
+  id: "maplibre-map",
+  lng: 0,
+  lat: 30,
+  zoom: 3,
+};
+
 const Home = () => {
-  const mapOptions = {
-    id: "maplibre-map",
-    lng: 0,
-    lat: 30,
-    zoom: 3,
-  };
   const ref = useRef(null);
   const [map, setMap] = useState<undefined | maplibregl.Map>();
   const [mode, setMode] = useState<string>("static");
