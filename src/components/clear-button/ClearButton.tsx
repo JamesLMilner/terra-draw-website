@@ -1,5 +1,5 @@
 import { h } from "preact";
-import style from "./style.css";
+import style from "./style.module.css";
 import clear from "../../assets/imgs/clear.png";
 import { TerraDraw } from "terra-draw";
 

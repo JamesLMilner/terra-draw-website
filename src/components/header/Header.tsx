@@ -1,6 +1,6 @@
 import { h } from "preact";
 import { Link } from "preact-router/match";
-import style from "./style.css";
+import style from "./style.module.css";
 import logo from "../../assets/imgs/logo.png";
 import github from "../../assets/imgs/github.png";
 

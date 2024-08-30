@@ -1,5 +1,5 @@
 import { h } from "preact";
-import style from "./style.css";
+import style from "./style.module.css";
 import { useMemo } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { fileDate } from "../../utils/dates";
