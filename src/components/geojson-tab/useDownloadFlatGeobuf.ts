@@ -1,7 +1,7 @@
 import { useCallback } from "preact/hooks";
 import { FeatureCollection } from "geojson";
 
-export function useDownloadFlatGeoBuf() {
+export function useDownloadFlatGeobuf() {
   const downloadJSON = useCallback(
     async (json: FeatureCollection, filename: string) => {
 
