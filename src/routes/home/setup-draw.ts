@@ -1,6 +1,6 @@
 import {
   TerraDraw,
-  TerraDrawLeafletAdapter,
+  TerraDrawMapLibreGLAdapter,
   TerraDrawSelectMode,
   TerraDrawPointMode,
   TerraDrawLineStringMode,
@@ -10,14 +10,14 @@ import {
   ValidateNotSelfIntersecting,
   TerraDrawRectangleMode,
 } from "terra-draw";
-import * as L from "leaflet";
+import maplibregl from "maplibre-gl";
 
-export function setupDraw(map: L.Map, leaflet: typeof L) {
+export function setupDraw(map: maplibregl.Map) {
   return new TerraDraw({
     tracked: true,
-    adapter: new TerraDrawLeafletAdapter({
-      lib: leaflet,
+    adapter: new TerraDrawMapLibreGLAdapter({
       map,
+      maplibregl,
       coordinatePrecision: 9,
     }),
     modes: [

@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import { useMemo } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { fileDate } from "../../utils/dates";
-import { useDownloadFlatGeoBuf } from "./useDownloadFlatGeoBuf";
+import { useDownloadFlatGeobuf } from "./useDownloadFlatGeobuf";
 import { FeatureCollection } from "geojson";
 import { useDownloadJSON } from "./useDownloadJSON";
 
@@ -24,12 +24,12 @@ const GeoJSONTab = ({ features, format, setFormat }: { features: GeoJSONStoreFea
   }, [featureCollection]);
 
   const downloadJSON = useDownloadJSON();
-  const downloadFlatGeoBuf = useDownloadFlatGeoBuf();
+  const downloadFlatGeobuf = useDownloadFlatGeobuf();
 
   // Download to a file called terradraw.geojson
   const downloadGeoJSON = () => format === 'geojson' ?
     downloadJSON(featureCollection, `terradraw_${fileDate()}.geojson`) :
-    downloadFlatGeoBuf(featureCollection, `terradraw_${fileDate()}.fgb`);
+    downloadFlatGeobuf(featureCollection, `terradraw_${fileDate()}.fgb`);
 
   const copyGeoJSON = () => {
     navigator.clipboard && navigator.clipboard.writeText(featureCollectionString);
