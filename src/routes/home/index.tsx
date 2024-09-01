@@ -96,14 +96,16 @@ const Home = () => {
   return (
     <div class={style.home}>
       <div ref={ref} class={style.map} id={mapOptions.id}>
-        {navigator.geolocation && draw ? (
-          <GeolocationButton
-            setLocation={(position) => {
-              map && map.flyTo({ center: { lng: position[0], lat: position[1] }, zoom: 14, animate: false });
-            }}
-          />
-        ) : null}
-        {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} /> : null}
+        <div class={style.leftButtons}>
+          {navigator.geolocation && draw ? (
+            <GeolocationButton
+              setLocation={(position) => {
+                map && map.flyTo({ center: { lng: position[0], lat: position[1] }, zoom: 14, animate: false });
+              }}
+            />
+          ) : null}
+          {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} /> : null}
+        </div>
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
