@@ -4,6 +4,13 @@
   display: flex;
 }
 
+.leftButtons {
+  position: absolute;
+  padding: 8px;
+  width: 52px;
+  height: 100%;
+}
+
 .map {
   position: relative;
   height: calc(100vh - 70px);
