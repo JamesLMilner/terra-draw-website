@@ -17,7 +17,6 @@ export function setupDraw(map: maplibregl.Map) {
     tracked: true,
     adapter: new TerraDrawMapLibreGLAdapter({
       map,
-      maplibregl,
       coordinatePrecision: 9,
     }),
     modes: [
@@ -80,7 +79,9 @@ export function setupDraw(map: maplibregl.Map) {
           if (updateType === "finish" || updateType === "commit") {
             return ValidateNotSelfIntersecting(feature);
           }
-          return true
+          return {
+            valid: true
+          }
         }
       }),
       new TerraDrawRectangleMode(),
@@ -91,7 +92,9 @@ export function setupDraw(map: maplibregl.Map) {
           if (updateType === "finish" || updateType === "commit") {
             return ValidateNotSelfIntersecting(feature);
           }
-          return true
+          return {
+            valid: true
+          }
         }
       }),
       new TerraDrawCircleMode(),
