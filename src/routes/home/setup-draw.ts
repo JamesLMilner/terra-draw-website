@@ -1,6 +1,5 @@
 import {
   TerraDraw,
-  TerraDrawMapLibreGLAdapter,
   TerraDrawSelectMode,
   TerraDrawPointMode,
   TerraDrawLineStringMode,
@@ -10,6 +9,9 @@ import {
   ValidateNotSelfIntersecting,
   TerraDrawRectangleMode,
 } from "terra-draw";
+
+import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
+
 import maplibregl from "maplibre-gl";
 
 export function setupDraw(map: maplibregl.Map) {
