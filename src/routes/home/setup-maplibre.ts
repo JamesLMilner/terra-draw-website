@@ -21,7 +21,7 @@ export function setupMaplibreMap({
   const PROTOMAPS_API_KEY = "d23c43b7c56e123d";
   return new maplibregl.Map({
     container: id,
-    style: `https://api.protomaps.com/styles/v3/white.json?key=${PROTOMAPS_API_KEY}`,
+    style: `https://api.protomaps.com/styles/v4/white/en.json?key=${PROTOMAPS_API_KEY}`,
     center: { lat, lng },
     zoom,
   });
