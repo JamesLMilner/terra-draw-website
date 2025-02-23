@@ -24,9 +24,6 @@ export function setupDraw(map: maplibregl.Map) {
     modes: [
       new TerraDrawSelectMode({
         flags: {
-          arbitary: {
-            feature: {},
-          },
           polygon: {
             feature: {
               scaleable: true,
@@ -76,7 +73,6 @@ export function setupDraw(map: maplibregl.Map) {
       }),
       new TerraDrawPointMode(),
       new TerraDrawLineStringMode({
-        snapping: true,
         validation: (feature, { updateType }) => {
           if (updateType === "finish" || updateType === "commit") {
             return ValidateNotSelfIntersecting(feature);
@@ -88,7 +84,6 @@ export function setupDraw(map: maplibregl.Map) {
       }),
       new TerraDrawRectangleMode(),
       new TerraDrawPolygonMode({
-        // snapping: true,
         pointerDistance: 30,
         validation: (feature, { updateType }) => {
           if (updateType === "finish" || updateType === "commit") {
