@@ -1,6 +1,6 @@
 import { h } from "preact";
 import style from "./style.module.css";
-import "maplibre-gl/dist/maplibre-gl.css";
+import "mapbox-gl/dist/mapbox-gl.css";
 import {
   useMemo,
   useRef,
@@ -8,10 +8,10 @@ import {
   useState,
   useCallback,
 } from "preact/hooks";
-import maplibregl from "maplibre-gl";
+import mapboxgl from "mapbox-gl";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { setupDraw } from "./setup-draw";
-import { setupMaplibreMap } from "./setup-maplibre";
+
 import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
@@ -19,6 +19,7 @@ import GeolocationButton from "../../components/geolocation-button/GeolocationBu
 import ClearButton from "../../components/clear-button/ClearButton";
 import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
+import { setupMapboxMap } from "./setup-mapbox";
 
 const mapOptions = {
   id: "maplibre-map",
@@ -29,31 +30,30 @@ const mapOptions = {
 
 const Home = () => {
   const ref = useRef(null);
-  const [map, setMap] = useState<undefined | maplibregl.Map>();
+  const [map, setMap] = useState<undefined | mapboxgl.Map>();
   const [mode, setMode] = useState<string>("static");
   const [expanded, setExpanded] = useState<boolean>(true);
   const [selected, setSelected] = useState<GeoJSONStoreFeatures | undefined>();
   const [features, setFeatures] = useState<GeoJSONStoreFeatures[]>([]);
-  const [tab, setTabState] = useState<"info" | "geojson">(localStorage.getItem(
-    'tab') ? localStorage.getItem('tab') as 'info' | 'geojson' : "info"
+  const [tab, setTabState] = useState<"info" | "geojson">(
+    localStorage.getItem("tab")
+      ? (localStorage.getItem("tab") as "info" | "geojson")
+      : "info"
   );
-  const [format, setFormat] = useState<'geojson' | 'fgb'>('geojson');
+  const [format, setFormat] = useState<"geojson" | "fgb">("geojson");
 
-  const setTab = (newTab: 'info' | 'geojson') => {
+  const setTab = (newTab: "info" | "geojson") => {
     setTabState(newTab);
-    localStorage.setItem('tab', newTab);
-  }
+    localStorage.setItem("tab", newTab);
+  };
 
-  const {
-    clearLocalStorage,
-    setLocalStorage,
-    getLocalStorage
-  } = useLocalStorageStore();
+  const { clearLocalStorage, setLocalStorage, getLocalStorage } =
+    useLocalStorageStore();
 
   useEffect(() => {
-    const maplibreMap = setupMaplibreMap(mapOptions);
-    maplibreMap.on("load", () => {
-      setMap(maplibreMap);
+    const mapboxMap = setupMapboxMap(mapOptions);
+    mapboxMap.on("load", () => {
+      setMap(mapboxMap);
     });
   }, []);
 
@@ -84,13 +84,12 @@ const Home = () => {
         setLocalStorage(stripSnapshot(snapshot));
       });
 
-      const snapshot = getLocalStorage()
+      const snapshot = getLocalStorage();
       if (snapshot) {
         const parsed = JSON.parse(snapshot);
         draw.addFeatures(parsed);
       }
     }
-
   }, [getLocalStorage, setLocalStorage, draw]);
 
   return (
@@ -100,11 +99,18 @@ const Home = () => {
           {navigator.geolocation && draw ? (
             <GeolocationButton
               setLocation={(position) => {
-                map && map.flyTo({ center: { lng: position[0], lat: position[1] }, zoom: 14, animate: false });
+                map &&
+                  map.flyTo({
+                    center: { lng: position[0], lat: position[1] },
+                    zoom: 14,
+                    animate: false,
+                  });
               }}
             />
           ) : null}
-          {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} /> : null}
+          {draw ? (
+            <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} />
+          ) : null}
         </div>
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
@@ -136,7 +142,11 @@ const Home = () => {
           {tab === "info" ? (
             <InfoTab selected={selected} features={features} />
           ) : (
-            <GeoJSONTab features={features} format={format} setFormat={(newFormat: 'geojson' | 'fgb') => setFormat(newFormat)} />
+            <GeoJSONTab
+              features={features}
+              format={format}
+              setFormat={(newFormat: "geojson" | "fgb") => setFormat(newFormat)}
+            />
           )}
         </div>
       </div>

@@ -25,12 +25,14 @@
     "@types/geojson": "^7946.0.10",
     "flatgeobuf": "^3.33.0",
     "history": "^5.3.0",
+    "mapbox-gl": "^3.11.1",
     "maplibre-gl": "^4.6.0",
     "preact": "^10.10.0",
     "preact-iso": "^2.6.3",
     "preact-render-to-string": "^6.5.10",
     "preact-router": "^3.2.1",
     "terra-draw": "1.2.0",
+    "terra-draw-mapbox-gl-adapter": "^1.0.0",
     "terra-draw-maplibre-gl-adapter": "1.0.0"
   },
   "devDependencies": {

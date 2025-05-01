@@ -10,14 +10,14 @@ import {
   TerraDrawRectangleMode,
 } from "terra-draw";
 
-import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
+import { TerraDrawMapboxGLAdapter } from "terra-draw-mapbox-gl-adapter";
 
-import maplibregl from "maplibre-gl";
+import mapboxgl from "mapbox-gl";
 
-export function setupDraw(map: maplibregl.Map) {
+export function setupDraw(map: mapboxgl.Map) {
   return new TerraDraw({
     tracked: true,
-    adapter: new TerraDrawMapLibreGLAdapter({
+    adapter: new TerraDrawMapboxGLAdapter({
       map,
       coordinatePrecision: 9,
     }),
@@ -60,9 +60,9 @@ export function setupDraw(map: maplibregl.Map) {
             feature: {
               draggable: true,
               coordinates: {
-                resizable: 'opposite'
-              }
-            }
+                resizable: "opposite",
+              },
+            },
           },
           freehand: {
             feature: {
@@ -78,9 +78,9 @@ export function setupDraw(map: maplibregl.Map) {
             return ValidateNotSelfIntersecting(feature);
           }
           return {
-            valid: true
-          }
-        }
+            valid: true,
+          };
+        },
       }),
       new TerraDrawRectangleMode(),
       new TerraDrawPolygonMode({
@@ -90,16 +90,16 @@ export function setupDraw(map: maplibregl.Map) {
             return ValidateNotSelfIntersecting(feature);
           }
           return {
-            valid: true
-          }
-        }
+            valid: true,
+          };
+        },
       }),
       new TerraDrawCircleMode(),
       new TerraDrawFreehandMode({
         pointerDistance: 5,
         validation: (feature) => {
           return ValidateNotSelfIntersecting(feature);
-        }
+        },
       }),
     ],
   });
