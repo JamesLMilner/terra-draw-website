@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && echo 'terradraw.io' > docs/CNAME",
+    "build": "vite build",
     "lint": "eslint src",
     "test": "jest"
   },
@@ -30,8 +30,8 @@
     "preact-iso": "^2.6.3",
     "preact-render-to-string": "^6.5.10",
     "preact-router": "^3.2.1",
-    "terra-draw": "1.2.0",
-    "terra-draw-maplibre-gl-adapter": "1.0.0"
+    "terra-draw": "1.6.3",
+    "terra-draw-maplibre-gl-adapter": "1.1.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.9.0",
