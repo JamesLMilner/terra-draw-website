@@ -2,7 +2,6 @@ import { h } from "preact";
 import style from "./style.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
-  useMemo,
   useRef,
   useEffect,
   useState,
@@ -19,6 +18,7 @@ import GeolocationButton from "../../components/geolocation-button/GeolocationBu
 import ClearButton from "../../components/clear-button/ClearButton";
 import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
+import { TerraDraw } from "terra-draw";
 
 const mapOptions = {
   id: "maplibre-map",
@@ -38,6 +38,7 @@ const Home = () => {
     'tab') ? localStorage.getItem('tab') as 'info' | 'geojson' : "info"
   );
   const [format, setFormat] = useState<'geojson' | 'fgb'>('geojson');
+  const [draw, setDraw] = useState<undefined | TerraDraw>();
 
   const setTab = (newTab: 'info' | 'geojson') => {
     setTabState(newTab);
@@ -52,17 +53,19 @@ const Home = () => {
 
   useEffect(() => {
     const maplibreMap = setupMaplibreMap(mapOptions);
-    maplibreMap.on("load", () => {
+    maplibreMap.once("style.load", () => {
       setMap(maplibreMap);
     });
   }, []);
 
-  const draw = useMemo(() => {
-    if (map) {
-      const terraDraw = setupDraw(map);
-      terraDraw.start();
-      return terraDraw;
+  useEffect(() => {
+    if (!map) {
+      return
     }
+    const terraDraw = setupDraw(map);
+    terraDraw.start();
+
+    setDraw(terraDraw)
   }, [map]);
 
   const changeMode = useCallback(
