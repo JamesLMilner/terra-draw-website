@@ -8,11 +8,14 @@ import {
   TerraDrawFreehandMode,
   ValidateNotSelfIntersecting,
   TerraDrawRectangleMode,
+  TerraDrawMarkerMode,
 } from "terra-draw";
 
 import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
 
 import maplibregl from "maplibre-gl";
+
+import pinMarker from "../../assets/imgs/pin-marker.png";
 
 export function setupDraw(map: maplibregl.Map) {
   return new TerraDraw({
@@ -99,6 +102,13 @@ export function setupDraw(map: maplibregl.Map) {
         pointerDistance: 5,
         validation: (feature) => {
           return ValidateNotSelfIntersecting(feature);
+        }
+      }),
+      new TerraDrawMarkerMode({
+        styles: {
+          markerUrl: pinMarker,
+          markerWidth: 30 * 0.75,
+          markerHeight: 30,
         }
       }),
     ],

@@ -31,7 +31,7 @@
     "preact-render-to-string": "^6.5.10",
     "preact-router": "^3.2.1",
     "terra-draw": "1.17.0",
-    "terra-draw-maplibre-gl-adapter": "1.1.2"
+    "terra-draw-maplibre-gl-adapter": "1.2.0"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.9.0",

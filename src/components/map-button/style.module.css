@@ -1,21 +1,25 @@
 .button {
-  padding: 6px;
-  width: 100px;
+  padding: 8px;
+  font-family: "Funnel Display", sans-serif;
   background: #fdfdfd;
   border: solid 1px #ebebeb;
-  cursor: pointer;
-  border-radius: 10px;
+  cursor: pointer !important;
+  border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
   color: #565656;
   margin: 4px;
   margin-top: 8px;
-  border: solid 3px #565656;
+  border: solid 2px #565656;
+  align-items: center;
+  justify-content: left;
+  display: flex;
+  gap: 5px;
 }
 
 .button:hover {
-  background: white;
-  border: solid 3px #222222;
+  transition: border 0.5s;
+  border: solid 2px #00d088;
 }
 
 .active {

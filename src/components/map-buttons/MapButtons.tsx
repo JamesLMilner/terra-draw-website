@@ -40,6 +40,7 @@ const MapButtons = ({
         changeMode={changeMode}
         hiddenOnTouch={true}
       />
+      <MapButton mode={"marker"} currentMode={mode} changeMode={changeMode} />
     </div>
   );
 };
