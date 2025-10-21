@@ -15,8 +15,6 @@ import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
 
 import maplibregl from "maplibre-gl";
 
-import pinMarker from "../../assets/imgs/pin-marker.png";
-
 export function setupDraw(map: maplibregl.Map) {
   return new TerraDraw({
     tracked: true,
@@ -27,6 +25,11 @@ export function setupDraw(map: maplibregl.Map) {
     modes: [
       new TerraDrawSelectMode({
         flags: {
+          marker: {
+            feature: {
+              draggable: true,
+            },
+          },
           polygon: {
             feature: {
               scaleable: true,
@@ -104,13 +107,7 @@ export function setupDraw(map: maplibregl.Map) {
           return ValidateNotSelfIntersecting(feature);
         }
       }),
-      new TerraDrawMarkerMode({
-        styles: {
-          markerUrl: pinMarker,
-          markerWidth: 30 * 0.75,
-          markerHeight: 30,
-        }
-      }),
+      new TerraDrawMarkerMode(),
     ],
   });
 }
