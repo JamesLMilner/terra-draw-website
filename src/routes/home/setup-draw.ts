@@ -39,7 +39,7 @@ export function setupDraw(map: maplibregl.Map) {
                 midpoints: true,
                 draggable: true,
                 deletable: true,
-              },  
+              },
             },
           },
           linestring: {
@@ -62,10 +62,7 @@ export function setupDraw(map: maplibregl.Map) {
           },
           point: {
             feature: {
-              draggable: true,
-              coordinates: {
-                midpoints: true
-              }
+              draggable: true
             },
           },
           rectangle: {
