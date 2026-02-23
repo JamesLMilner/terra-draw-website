@@ -107,7 +107,7 @@ const Home = () => {
               }}
             />
           ) : null}
-          {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} /> : null}
+          {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} setFeatures={setFeatures} /> : null}
         </div>
         {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
       </div>
