@@ -1,9 +1,17 @@
 import { h } from "preact";
 import style from "./style.module.css";
 import clear from "../../assets/imgs/clear.png";
-import { TerraDraw } from "terra-draw";
+import { GeoJSONStoreFeatures, TerraDraw } from "terra-draw";
 
-const ClearButton = ({ draw, clearLocalStorage }: { draw: TerraDraw, clearLocalStorage: () => void }) => {
+const ClearButton = ({
+  draw,
+  clearLocalStorage,
+  setFeatures,
+}: {
+  draw: TerraDraw;
+  clearLocalStorage: () => void;
+  setFeatures: (features: GeoJSONStoreFeatures[]) => void;
+}) => {
   const classes = style.button;
 
   return (
@@ -13,7 +21,8 @@ const ClearButton = ({ draw, clearLocalStorage }: { draw: TerraDraw, clearLocalS
       title={"Clear"}
       onClick={() => {
         draw.clear();
-        clearLocalStorage()
+        clearLocalStorage();
+        setFeatures([]);
       }}
     >
       <img class={style.clear} src={clear} />
