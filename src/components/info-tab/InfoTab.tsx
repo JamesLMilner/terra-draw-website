@@ -1,6 +1,6 @@
 import { h } from "preact";
 import style from "./style.module.css";
-import { getHHMMSS } from "../../utils/dates";
+import { formatDateTime } from "../../utils/dates";
 import { area, length } from "../../utils/geo";
 import { useMemo } from "preact/hooks";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
@@ -64,13 +64,13 @@ const InfoTab = ({
         <span class={style.row}>
           <span class={style.type}>Created</span>
           {selected && selected.properties.createdAt
-            ? getHHMMSS(selected.properties.createdAt as number)
+            ? formatDateTime(selected.properties.createdAt as number)
             : "N/A"}
         </span>
         <span class={style.row}>
           <span class={style.type}>Updated</span>
           {selected && selected.properties.updatedAt
-            ? getHHMMSS(selected.properties.updatedAt as number)
+            ? formatDateTime(selected.properties.updatedAt as number)
             : "N/A"}
         </span>
         <span class={style.row}>
