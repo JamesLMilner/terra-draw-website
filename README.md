@@ -4,6 +4,11 @@ The official [Terra Draw](https://www.github.com/JamesLMilner/terra-draw) websit
 
 # Running Locally
 
+Versions we use:
+
+- Node 24
+- npm 11
+
 You can then create a watching build that allows you to test out both changes in the example but also the Terra Draw source itself, like so:
 
 `npm run dev`
