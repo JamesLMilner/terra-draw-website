@@ -34,7 +34,7 @@
     "terra-draw-maplibre-gl-adapter": "1.2.0"
   },
   "devDependencies": {
-    "@preact/preset-vite": "^2.9.0",
+    "@preact/preset-vite": "^2.10.5",
     "@types/enzyme": "^3.10.12",
     "@types/jest": "^27.4.1",
     "@typescript-eslint/eslint-plugin": "^5.30.6",
@@ -46,7 +46,7 @@
     "jest": "^27.5.1",
     "jest-preset-preact": "^4.1.1",
     "typescript": "^5.4.2",
-    "vite": "^5.4.2"
+    "vite": "^8.0.3"
   },
   "jest": {
     "preset": "jest-preset-preact",
