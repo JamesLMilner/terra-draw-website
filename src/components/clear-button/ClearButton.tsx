@@ -1,7 +1,7 @@
 import { h } from "preact";
 import style from "./style.module.css";
-import clear from "../../assets/imgs/clear.png";
 import { GeoJSONStoreFeatures, TerraDraw } from "terra-draw";
+import { Trash2 } from "lucide-preact";
 
 const ClearButton = ({
   draw,
@@ -19,13 +19,14 @@ const ClearButton = ({
       id="clear"
       class={classes}
       title={"Clear"}
+      aria-label={"Clear"}
       onClick={() => {
         draw.clear();
         clearLocalStorage();
         setFeatures([]);
       }}
     >
-      <img class={style.clear} src={clear} />
+      <Trash2 size={16} aria-hidden={true} />
     </button>
   );
 };
