@@ -18,7 +18,7 @@ const MapActionButton = ({
   title?: string;
   hiddenOnTouch?: boolean;
 }) => {
-  let classes = style.button;
+  let classes = `${style.button} ${style.actionButton}`;
 
   if (hiddenOnTouch) {
     classes = `${style.hiddenOnMobile} ${classes}`;

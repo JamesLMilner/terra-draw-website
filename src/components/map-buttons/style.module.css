@@ -45,11 +45,12 @@
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 4px;
   }
 
   .section {
-    padding: 2px 4px 6px;
+    padding: 1px 3px 4px;
+    border-radius: 10px;
     justify-content: center;
   }
 
