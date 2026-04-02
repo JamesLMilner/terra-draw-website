@@ -1,12 +1,7 @@
 import { h } from "preact";
 import style from "./style.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
-import {
-  useRef,
-  useEffect,
-  useState,
-  useCallback,
-} from "preact/hooks";
+import { useRef, useEffect, useState, useCallback } from "preact/hooks";
 import maplibregl from "maplibre-gl";
 import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { setupDraw } from "./setup-draw";
@@ -31,25 +26,26 @@ const Home = () => {
   const ref = useRef(null);
   const [map, setMap] = useState<undefined | maplibregl.Map>();
   const [mode, setMode] = useState<string>("static");
+  const [action, setAction] = useState<string>("");
+
   const [expanded, setExpanded] = useState<boolean>(true);
   const [selected, setSelected] = useState<GeoJSONStoreFeatures | undefined>();
   const [features, setFeatures] = useState<GeoJSONStoreFeatures[]>([]);
-  const [tab, setTabState] = useState<"info" | "geojson">(localStorage.getItem(
-    'tab') ? localStorage.getItem('tab') as 'info' | 'geojson' : "info"
+  const [tab, setTabState] = useState<"info" | "geojson">(
+    localStorage.getItem("tab")
+      ? (localStorage.getItem("tab") as "info" | "geojson")
+      : "info",
   );
-  const [format, setFormat] = useState<'geojson' | 'fgb'>('geojson');
+  const [format, setFormat] = useState<"geojson" | "fgb">("geojson");
   const [draw, setDraw] = useState<undefined | TerraDraw>();
 
-  const setTab = (newTab: 'info' | 'geojson') => {
+  const setTab = (newTab: "info" | "geojson") => {
     setTabState(newTab);
-    localStorage.setItem('tab', newTab);
-  }
+    localStorage.setItem("tab", newTab);
+  };
 
-  const {
-    clearLocalStorage,
-    setLocalStorage,
-    getLocalStorage
-  } = useLocalStorageStore();
+  const { clearLocalStorage, setLocalStorage, getLocalStorage } =
+    useLocalStorageStore();
 
   useEffect(() => {
     const maplibreMap = setupMaplibreMap(mapOptions);
@@ -60,12 +56,12 @@ const Home = () => {
 
   useEffect(() => {
     if (!map) {
-      return
+      return;
     }
     const terraDraw = setupDraw(map);
     terraDraw.start();
 
-    setDraw(terraDraw)
+    setDraw(terraDraw);
   }, [map]);
 
   const changeMode = useCallback(
@@ -75,7 +71,24 @@ const Home = () => {
         draw.setMode(newMode);
       }
     },
-    [draw]
+    [draw],
+  );
+
+  const changeAction = useCallback(
+    (newAction: string) => {
+      if (draw && newAction) {
+        setAction(newAction);
+
+        if (newAction === "undo") {
+          draw.undo();
+        } else if (newAction === "redo") {
+          draw.redo();
+        } else {
+          return null;
+        }
+      }
+    },
+    [draw],
   );
 
   useEffect(() => {
@@ -87,13 +100,12 @@ const Home = () => {
         setLocalStorage(stripSnapshot(snapshot));
       });
 
-      const snapshot = getLocalStorage()
+      const snapshot = getLocalStorage();
       if (snapshot) {
         const parsed = JSON.parse(snapshot);
         draw.addFeatures(parsed);
       }
     }
-
   }, [getLocalStorage, setLocalStorage, draw]);
 
   return (
@@ -103,13 +115,31 @@ const Home = () => {
           {navigator.geolocation && draw ? (
             <GeolocationButton
               setLocation={(position) => {
-                map && map.flyTo({ center: { lng: position[0], lat: position[1] }, zoom: 14, animate: false });
+                map &&
+                  map.flyTo({
+                    center: { lng: position[0], lat: position[1] },
+                    zoom: 14,
+                    animate: false,
+                  });
               }}
             />
           ) : null}
-          {draw ? <ClearButton draw={draw} clearLocalStorage={clearLocalStorage} setFeatures={setFeatures} /> : null}
+          {draw ? (
+            <ClearButton
+              draw={draw}
+              clearLocalStorage={clearLocalStorage}
+              setFeatures={setFeatures}
+            />
+          ) : null}
         </div>
-        {draw ? <MapButtons mode={mode} changeMode={changeMode} /> : null}
+        {draw ? (
+          <MapButtons
+            mode={mode}
+            changeMode={changeMode}
+            action={action}
+            changeAction={changeAction}
+          />
+        ) : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
         <button
@@ -139,7 +169,11 @@ const Home = () => {
           {tab === "info" ? (
             <InfoTab selected={selected} features={features} />
           ) : (
-            <GeoJSONTab features={features} format={format} setFormat={(newFormat: 'geojson' | 'fgb') => setFormat(newFormat)} />
+            <GeoJSONTab
+              features={features}
+              format={format}
+              setFormat={(newFormat: "geojson" | "fgb") => setFormat(newFormat)}
+            />
           )}
         </div>
       </div>
