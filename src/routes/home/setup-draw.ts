@@ -9,6 +9,9 @@ import {
   ValidateNotSelfIntersecting,
   TerraDrawRectangleMode,
   TerraDrawMarkerMode,
+  TerraDrawModeUndoRedo,
+  TerraDrawSessionUndoRedo,
+  TerraDrawUndoRedoKeyboardShortcuts,
 } from "terra-draw";
 
 import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
@@ -109,5 +112,17 @@ export function setupDraw(map: maplibregl.Map) {
       }),
       new TerraDrawMarkerMode(),
     ],
+    undoRedo: {
+      modeLevel: new TerraDrawModeUndoRedo({ maxStackSize: 100 }),
+      sessionLevel: new TerraDrawSessionUndoRedo({ maxStackSize: 100 }),
+      keyboardShortcuts: new TerraDrawUndoRedoKeyboardShortcuts({
+        undo: [
+          {
+            key: "z",
+            heldKeys: ["control"]
+          }
+        ]
+      })
+    },
   });
 }

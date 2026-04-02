@@ -1,14 +1,18 @@
 import MapButton from "../map-button/MapButton";
 import { h } from "preact";
 import style from "./style.module.css";
+import MapActionButton from "../map-button/MapActionButton";
 
 const MapButtons = ({
   mode,
-
   changeMode,
+  action,
+  changeAction,
 }: {
   mode: string;
   changeMode: (mode: string) => void;
+  action?: string;
+  changeAction?: (action: string) => void;
 }) => {
   return (
     <div class={style.buttons}>
@@ -41,6 +45,18 @@ const MapButtons = ({
         hiddenOnTouch={true}
       />
       <MapButton mode={"marker"} currentMode={mode} changeMode={changeMode} />
+
+      {/* Undo/Redo Actions */}
+      <MapActionButton
+        action="undo"
+        currentAction={action as string}
+        changeAction={changeAction as () => void}
+      />
+      <MapActionButton
+        action="redo"
+        currentAction={action as string}
+        changeAction={changeAction as () => void}
+      />
     </div>
   );
 };
