@@ -49,11 +49,11 @@ jobs:
 
           git worktree add /tmp/gh-pages gh-pages
 
-          mkdir -p /tmp/gh-pages/docs
-          rsync -a --delete docs/ /tmp/gh-pages/docs/
+          rm -rf /tmp/gh-pages/docs
+          rsync -a docs/ /tmp/gh-pages/docs/
 
           cd /tmp/gh-pages
-          git add docs
+          git add -A docs
 
           if git diff --cached --quiet; then
             echo "No changes to deploy"
