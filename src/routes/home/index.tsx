@@ -9,11 +9,10 @@ import { setupMaplibreMap } from "./setup-maplibre";
 import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
-import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
-import ClearButton from "../../components/clear-button/ClearButton";
 import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
 import { TerraDraw } from "terra-draw";
+import { PanelRightClose, PanelRightOpen } from "lucide-preact";
 
 const mapOptions = {
   id: "maplibre-map",
@@ -111,46 +110,42 @@ const Home = () => {
   return (
     <div class={style.home}>
       <div ref={ref} class={style.map} id={mapOptions.id}>
-        <div class={style.leftButtons}>
-          {navigator.geolocation && draw ? (
-            <GeolocationButton
-              setLocation={(position) => {
-                map &&
-                  map.flyTo({
-                    center: { lng: position[0], lat: position[1] },
-                    zoom: 14,
-                    animate: false,
-                  });
-              }}
-            />
-          ) : null}
-          {draw ? (
-            <ClearButton
-              draw={draw}
-              clearLocalStorage={clearLocalStorage}
-              setFeatures={setFeatures}
-            />
-          ) : null}
-        </div>
         {draw ? (
           <MapButtons
             mode={mode}
             changeMode={changeMode}
             action={action}
             changeAction={changeAction}
+            draw={draw}
+            clearLocalStorage={clearLocalStorage}
+            setFeatures={setFeatures}
+            setLocation={(position) => {
+              map &&
+                map.flyTo({
+                  center: { lng: position[0], lat: position[1] },
+                  zoom: 14,
+                  animate: false,
+                });
+            }}
           />
         ) : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
         <button
           class={style.collapse}
+          title={expanded ? "Collapse side panel" : "Expand side panel"}
+          aria-label={expanded ? "Collapse side panel" : "Expand side panel"}
           onClick={() => {
             setExpanded(!expanded);
           }}
         >
-          {expanded ? ">" : "<"}
+          {expanded ? (
+            <PanelRightClose size={16} aria-hidden={true} />
+          ) : (
+            <PanelRightOpen size={16} aria-hidden={true} />
+          )}
         </button>
-        <div class={expanded ? style.tabs : style.tabsHidden}>
+        <div id="sidepanel" class={expanded ? style.tabs : style.tabsHidden}>
           <div class={style.tabButtons}>
             <span
               class={tab === "geojson" ? style.tabActive : style.tab}

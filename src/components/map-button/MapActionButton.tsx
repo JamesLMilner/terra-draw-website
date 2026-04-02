@@ -1,4 +1,4 @@
-import { h } from "preact";
+import { ComponentChildren, h } from "preact";
 import style from "./style.module.css";
 import { titleCase } from "../../utils/casing";
 
@@ -6,12 +6,16 @@ const MapActionButton = ({
   action,
   changeAction,
   label,
+  ariaLabel,
+  title,
   hiddenOnTouch,
 }: {
   action: string;
   currentAction: string;
   changeAction: (action: string) => void;
-  label?: string;
+  label?: ComponentChildren;
+  ariaLabel?: string;
+  title?: string;
   hiddenOnTouch?: boolean;
 }) => {
   let classes = style.button;
@@ -24,6 +28,8 @@ const MapActionButton = ({
     <button
       id={action}
       class={classes}
+      title={title ?? titleCase(action)}
+      aria-label={ariaLabel ?? titleCase(action)}
       onClick={() => {
         changeAction(action);
       }}

@@ -2,49 +2,116 @@
   resize: none;
   width: 100%;
   flex-grow: 1;
+  min-height: 0;
+  border: 1px solid #d4dde6;
+  border-radius: 10px;
+  padding: 12px;
+  color: #334155;
+  background: #ffffff;
   /** accomidate the 3px margin top for the download button **/
 }
 
 .container {
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-grow: 1;
+  min-height: 0;
   flex-direction: column;
+  gap: 10px;
+  background: #f8fafc;
+}
+
+.geojsonSection,
+.exportSection {
+  border: 1px solid #e0e7ef;
+  border-radius: 12px;
+  background: #ffffff;
+  padding: 10px;
+}
+
+.geojsonSection {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.exportSection {
+  flex-shrink: 0;
 }
 
 .copy {
-  padding: 10px;
-  font-weight: bold;
+  padding: 10px 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
   background: #00d088;
   color: white;
-  border: 0;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  margin-top: 3px;
+  border: 1px solid #00d088;
+  border-radius: 10px;
+  min-height: 40px;
+  transition: background-color 0.16s ease;
 }
 
 .download {
-  flex-grow: 1;
-  padding: 10px;
-  font-weight: bold;
+  padding: 10px 12px;
+  width: 100%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 700;
   background: #00d088;
   color: white;
-  border: 0;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  margin-top: 3px;
+  border: 1px solid #00d088;
+  border-radius: 10px;
+  min-height: 40px;
+  transition: background-color 0.16s ease;
 }
 
 .download:hover,
 .copy:hover {
   background: #00d088c4;
-  border: 2px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
 .formatSelect {
-  margin-top: 3px;
+  border: 1px solid #d4dde6;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #ffffff;
+  color: #334155;
+  min-height: 38px;
+  min-width: 150px;
 }
 
-.downloadContainer {
-  gap: 5px;
+.copyRow {
   display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}
+
+.formatRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.formatLabel {
+  font-size: 13px;
+  color: #5b6b7b;
+  font-weight: 600;
+}
+
+.exportHeader {
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #64748b;
+  font-weight: 700;
+  margin-bottom: 8px;
 }
