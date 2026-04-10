@@ -90,6 +90,23 @@ const Home = () => {
     [draw],
   );
 
+  const selectFeatureFromTable = useCallback(
+    (featureId: string) => {
+      if (!draw || !draw.hasFeature(featureId)) {
+        return;
+      }
+
+      draw.setMode("select");
+      setMode("select");
+      draw.selectFeature(featureId, "select");
+
+      const snapshot = draw.getSnapshot();
+      setFeatures(snapshot);
+      setSelected(snapshot.find((feature) => feature.properties.selected));
+    },
+    [draw],
+  );
+
   useEffect(() => {
     if (draw) {
       draw.on("change", () => {
@@ -103,6 +120,8 @@ const Home = () => {
       if (snapshot) {
         const parsed = JSON.parse(snapshot);
         draw.addFeatures(parsed);
+        // console.log("clearUndoRedoHistory", parsed);
+        draw.clearUndoRedoHistory();
       }
     }
   }, [getLocalStorage, setLocalStorage, draw]);
@@ -148,21 +167,25 @@ const Home = () => {
         <div id="sidepanel" class={expanded ? style.tabs : style.tabsHidden}>
           <div class={style.tabButtons}>
             <span
-              class={tab === "geojson" ? style.tabActive : style.tab}
-              onClick={() => setTab("geojson")}
-            >
-              GeoJSON
-            </span>
-            <span
               class={tab === "info" ? style.tabActive : style.tab}
               onClick={() => setTab("info")}
             >
               Info
             </span>
+            <span
+              class={tab === "geojson" ? style.tabActive : style.tab}
+              onClick={() => setTab("geojson")}
+            >
+              GeoJSON
+            </span>
           </div>
 
           {tab === "info" ? (
-            <InfoTab selected={selected} features={features} />
+            <InfoTab
+              selected={selected}
+              features={features}
+              onSelectFeature={selectFeatureFromTable}
+            />
           ) : (
             <GeoJSONTab
               features={features}
