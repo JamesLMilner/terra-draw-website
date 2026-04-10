@@ -28,8 +28,20 @@
   flex: 0 0 auto;
 }
 
+@media screen and (min-width: 900px) and (max-width: 1400px) {
+  .actionSection {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+}
+
 .modeSection {
-  flex: 1 1 420px;
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 100%;
 }
 
 @media screen and (min-width: 900px) {

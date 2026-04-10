@@ -92,6 +92,7 @@
 .collapse {
   cursor: pointer;
   width: 34px;
+  min-width: 34px;
   border: 0;
   border-right: 1px solid #e0e7ef;
   background: #f8fafc;
