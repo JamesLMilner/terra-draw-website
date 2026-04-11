@@ -30,7 +30,7 @@ export function setupDraw(map: maplibregl.Map) {
         flags: {
           marker: {
             feature: {
-              draggable: true,
+              draggable: true
             },
           },
           polygon: {
@@ -58,11 +58,14 @@ export function setupDraw(map: maplibregl.Map) {
           circle: {
             feature: {
               draggable: true,
+              coordinates: {
+                midpoints: true
+              }
             },
           },
           point: {
             feature: {
-              draggable: true,
+              draggable: true
             },
           },
           rectangle: {
@@ -76,12 +79,23 @@ export function setupDraw(map: maplibregl.Map) {
           freehand: {
             feature: {
               draggable: true,
+              coordinates: {
+                midpoints: true
+              }
             },
           },
         },
+        styles: {
+          // point
+          selectedPointColor: "#3F97E0",
+          selectedPointOutlineColor: "#000000",
+          selectedPointOutlineWidth: 2.2,
+          selectedPointWidth: 8
+        }
       }),
       new TerraDrawPointMode(),
       new TerraDrawLineStringMode({
+
         validation: (feature, { updateType }) => {
           if (updateType === "finish" || updateType === "commit") {
             return ValidateNotSelfIntersecting(feature);
