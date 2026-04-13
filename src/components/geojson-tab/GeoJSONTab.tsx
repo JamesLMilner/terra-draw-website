@@ -6,6 +6,7 @@ import { fileDate } from "../../utils/dates";
 import { useDownloadFlatGeobuf } from "./useDownloadFlatGeobuf";
 import { FeatureCollection } from "geojson";
 import { useDownloadJSON } from "./useDownloadJSON";
+import { Copy, Download } from "lucide-preact";
 
 const GeoJSONTab = ({ features, format, setFormat }: { features: GeoJSONStoreFeatures[], format: 'geojson' | 'fgb', setFormat: (format: 'geojson' | 'fgb') => void }) => {
   // Create a FeatureCollection when features changes
@@ -37,22 +38,39 @@ const GeoJSONTab = ({ features, format, setFormat }: { features: GeoJSONStoreFea
 
   return (
     <div class={style.container}>
-      <textarea class={style.geojson} readonly>
-        {featureCollectionString}
-      </textarea>
-      {navigator.clipboard ? <button class={style.copy} onClick={copyGeoJSON}>
-        Copy
-      </button> : null}
-      <div class={style.downloadContainer}>
+      <div class={style.geojsonSection}>
+        <textarea class={style.geojson} readOnly>
+          {featureCollectionString}
+        </textarea>
+        {navigator.clipboard ? <div class={style.copyRow}>
+          <button class={style.copy} onClick={copyGeoJSON}>
+            <Copy size={16} aria-hidden={true} />
+            Copy GeoJSON
+          </button>
+        </div>
+          : null}
+      </div>
+
+      <div class={style.exportSection}>
+        <div class={style.exportHeader}>Export</div>
+        <div class={style.formatRow}>
+          <label class={style.formatLabel} for="download-format">Format</label>
+          <select
+            id="download-format"
+            class={style.formatSelect}
+            value={format}
+            onChange={(event) => {
+              setFormat(event.currentTarget.value as 'geojson' | 'fgb')
+            }}
+          >
+            <option value="geojson">GeoJSON</option>
+            <option value="fgb">FlatGeobuf</option>
+          </select>
+        </div>
         <button class={style.download} onClick={downloadGeoJSON}>
+          <Download size={16} aria-hidden={true} />
           Download
         </button>
-        <select class={style.formatSelect} onChange={(event) => {
-          setFormat(event.currentTarget.value as 'geojson' | 'fgb')
-        }}>
-          <option value="geojson">GeoJSON</option>
-          <option value="flatgeobuf">FlatGeobuf</option>
-        </select>
       </div>
 
     </div>

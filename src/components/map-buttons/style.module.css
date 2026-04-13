@@ -5,14 +5,76 @@
   margin: auto;
   display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 85%;
+  margin-top: 6px;
+}
+
+.section {
+  background-color: #ffffffbd;
+  display: flex;
   flex-wrap: wrap;
-  width: 75%;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 2px 6px 6px;
+  border: 1px solid #dfe6ec;
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.actionSection {
+  flex: 0 0 auto;
+}
+
+@media screen and (min-width: 900px) and (max-width: 1400px) {
+  .actionSection {
+    display: grid;
+    grid-template-columns: repeat(2, max-content);
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+  }
+}
+
+.modeSection {
+  flex: 0 0 auto;
+  width: fit-content;
+  max-width: 100%;
+}
+
+@media screen and (min-width: 900px) {
+  .buttons {
+    width: 75%;
+  }
 }
 
 @media screen and (max-width: 900px) {
   .buttons {
-    width: 85%;
+    width: calc(100% - 60px);
     margin: auto;
-    margin-left: 45px;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .section {
+    padding: 1px 3px 4px;
+    border-radius: 10px;
+    justify-content: center;
+  }
+
+  .actionSection {
+    width: auto;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+
+  .modeSection {
+    flex: 0 1 auto;
+    max-width: 100%;
+    min-width: 0;
   }
 }

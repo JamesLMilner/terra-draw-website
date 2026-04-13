@@ -1,33 +1,68 @@
 .button {
-  padding: 8px;
+  padding: 9px 12px;
+  min-height: 38px;
   font-family: "Funnel Display", sans-serif;
-  background: #fdfdfd;
-  border: solid 1px #ebebeb;
+  letter-spacing: 0.01em;
+  background: #ffffff;
+  border: solid 1px #d4dde6;
   cursor: pointer !important;
-  border-radius: 4px;
-  font-weight: bold;
+  border-radius: 10px;
+  font-weight: 700;
   font-size: 14px;
-  color: #565656;
+  color: #3d4854;
   margin: 4px;
-  margin-top: 8px;
-  border: solid 2px #565656;
+  margin-top: 7px;
   align-items: center;
-  justify-content: left;
+  justify-content: center;
   display: flex;
   gap: 5px;
+  box-shadow: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.18s ease,
+    color 0.18s ease,
+    background-color 0.18s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .button:hover {
+    border-color: #00d088;
+    background: #f8fffc;
+    box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.65);
+  }
 }
 
 .button:hover {
-  transition: border 0.5s;
-  border: solid 2px #00d088;
+  border-color: #00d088;
+  background: #f8fffc;
+  box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.65);
 }
+
 
 .active {
-  color: #02cf87;
-  transition: color 0.5s;
+  color: #008a5b;
+  border-color: #00d088;
+  background: #effff8;
+  box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.7);
 }
 
-.hiddenOnMobile {}
+.button:focus-visible {
+  outline: none;
+  border-color: #00d088;
+  background: #f8fffc;
+  box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.75);
+}
+
+.actionButton:focus-visible,
+.actionButton:active {
+  border-color: #d4dde6;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+.hiddenOnMobile {
+  display: flex;
+}
 
 @media screen and (max-width: 900px) {
 
@@ -37,7 +72,12 @@
   }
 
   .button {
-    padding: 9px;
+    padding: 7px 8px;
+    min-height: 34px;
+    font-size: 13px;
+    margin: 3px;
+    margin-top: 4px;
+    border-radius: 8px;
   }
 
   .hiddenOnMobile {

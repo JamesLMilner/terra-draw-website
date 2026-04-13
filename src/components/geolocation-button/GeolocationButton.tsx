@@ -1,6 +1,6 @@
 import { h } from "preact";
 import style from "./style.module.css";
-import geolocation from "../../assets/imgs/geolocation.png";
+import { LocateFixed } from "lucide-preact";
 
 const GeolocationButton = ({
   setLocation,
@@ -13,9 +13,9 @@ const GeolocationButton = ({
     <button
       id="geolocation"
       class={classes}
-      title={"Geolocation"}
+      title={"Geolocate"}
+      aria-label={"Geolocate"}
       onClick={() => {
-        console.log("clicked", navigator.geolocation);
         navigator.geolocation.getCurrentPosition(
           (position) => {
             setLocation([position.coords.longitude, position.coords.latitude]);
@@ -27,7 +27,7 @@ const GeolocationButton = ({
         );
       }}
     >
-      <img class={style.geolocation} src={geolocation} />
+      <LocateFixed size={16} aria-hidden={true} />
     </button>
   );
 };

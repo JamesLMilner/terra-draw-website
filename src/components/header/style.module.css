@@ -20,7 +20,39 @@
   display: flex;
   justify-items: center;
   align-items: center;
+  gap: 10px;
   margin-right: 20px;
+}
+
+.github a {
+  display: inline-flex;
+  align-items: center;
+}
+
+.sponsorButton {
+  min-height: 34px;
+  padding: 0 12px;
+  border-radius: 10px;
+  border: 1px solid #d4dde6;
+  background: #ffffff;
+  color: #334155;
+  font-weight: 700;
+  text-decoration: none;
+  gap: 6px;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease;
+}
+
+.sponsorHeart {
+  color: #ec4899;
+}
+
+.sponsorButton:hover {
+  border-color: #00d088;
+  background: #f8fffc;
+  color: #008a5b;
 }
 
 .logo {
@@ -28,6 +60,13 @@
   display: flex;
   align-self: center;
   padding-left: 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .logo {
+    height: 28px;
+    padding-left: 14px;
+  }
 }
 
 .header h1 {
@@ -69,7 +108,14 @@
 
 @media screen and (max-width: 500px) {
   .logo {
-    display: none;
+    height: 24px;
+    padding-left: 10px;
+  }
+
+  .sponsorButton,
+  .homeLink,
+  .apiLink {
+    display: none !important;
   }
 
   .header nav {

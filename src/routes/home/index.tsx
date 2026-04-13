@@ -9,11 +9,10 @@ import { setupMaplibreMap } from "./setup-maplibre";
 import InfoTab from "../../components/info-tab/InfoTab";
 import GeoJSONTab from "../../components/geojson-tab/GeoJSONTab";
 import MapButtons from "../../components/map-buttons/MapButtons";
-import GeolocationButton from "../../components/geolocation-button/GeolocationButton";
-import ClearButton from "../../components/clear-button/ClearButton";
 import { useLocalStorageStore } from "./store-local-storage";
 import { stripSnapshot } from "./strip-snapshot";
 import { TerraDraw } from "terra-draw";
+import { PanelRightClose, PanelRightOpen } from "lucide-preact";
 
 const mapOptions = {
   id: "maplibre-map",
@@ -91,6 +90,23 @@ const Home = () => {
     [draw],
   );
 
+  const selectFeatureFromTable = useCallback(
+    (featureId: string) => {
+      if (!draw || !draw.hasFeature(featureId)) {
+        return;
+      }
+
+      draw.setMode("select");
+      setMode("select");
+      draw.selectFeature(featureId, "select");
+
+      const snapshot = draw.getSnapshot();
+      setFeatures(snapshot);
+      setSelected(snapshot.find((feature) => feature.properties.selected));
+    },
+    [draw],
+  );
+
   useEffect(() => {
     if (draw) {
       draw.on("change", () => {
@@ -104,6 +120,8 @@ const Home = () => {
       if (snapshot) {
         const parsed = JSON.parse(snapshot);
         draw.addFeatures(parsed);
+        // console.log("clearUndoRedoHistory", parsed);
+        draw.clearUndoRedoHistory();
       }
     }
   }, [getLocalStorage, setLocalStorage, draw]);
@@ -111,63 +129,63 @@ const Home = () => {
   return (
     <div class={style.home}>
       <div ref={ref} class={style.map} id={mapOptions.id}>
-        <div class={style.leftButtons}>
-          {navigator.geolocation && draw ? (
-            <GeolocationButton
-              setLocation={(position) => {
-                map &&
-                  map.flyTo({
-                    center: { lng: position[0], lat: position[1] },
-                    zoom: 14,
-                    animate: false,
-                  });
-              }}
-            />
-          ) : null}
-          {draw ? (
-            <ClearButton
-              draw={draw}
-              clearLocalStorage={clearLocalStorage}
-              setFeatures={setFeatures}
-            />
-          ) : null}
-        </div>
         {draw ? (
           <MapButtons
             mode={mode}
             changeMode={changeMode}
             action={action}
             changeAction={changeAction}
+            draw={draw}
+            clearLocalStorage={clearLocalStorage}
+            setFeatures={setFeatures}
+            setLocation={(position) => {
+              map &&
+                map.flyTo({
+                  center: { lng: position[0], lat: position[1] },
+                  zoom: 14,
+                  animate: false,
+                });
+            }}
           />
         ) : null}
       </div>
       <div class={expanded ? style.expanded : style.collapsed}>
         <button
           class={style.collapse}
+          title={expanded ? "Collapse side panel" : "Expand side panel"}
+          aria-label={expanded ? "Collapse side panel" : "Expand side panel"}
           onClick={() => {
             setExpanded(!expanded);
           }}
         >
-          {expanded ? ">" : "<"}
+          {expanded ? (
+            <PanelRightClose size={16} aria-hidden={true} />
+          ) : (
+            <PanelRightOpen size={16} aria-hidden={true} />
+          )}
         </button>
-        <div class={expanded ? style.tabs : style.tabsHidden}>
+        <div id="sidepanel" class={expanded ? style.tabs : style.tabsHidden}>
           <div class={style.tabButtons}>
-            <span
-              class={tab === "geojson" ? style.tabActive : style.tab}
-              onClick={() => setTab("geojson")}
-            >
-              GeoJSON
-            </span>
             <span
               class={tab === "info" ? style.tabActive : style.tab}
               onClick={() => setTab("info")}
             >
               Info
             </span>
+            <span
+              class={tab === "geojson" ? style.tabActive : style.tab}
+              onClick={() => setTab("geojson")}
+            >
+              GeoJSON
+            </span>
           </div>
 
           {tab === "info" ? (
-            <InfoTab selected={selected} features={features} />
+            <InfoTab
+              selected={selected}
+              features={features}
+              onSelectFeature={selectFeatureFromTable}
+            />
           ) : (
             <GeoJSONTab
               features={features}
