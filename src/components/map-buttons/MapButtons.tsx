@@ -70,6 +70,7 @@ const MapButtons = ({
           hiddenOnTouch={true}
         />
         <MapButton mode={"polygon"} currentMode={mode} changeMode={changeMode} />
+        <MapButton mode={"polyline"} currentMode={mode} changeMode={changeMode} />
         <MapButton
           mode={"freehand"}
           currentMode={mode}

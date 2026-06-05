@@ -3,6 +3,7 @@ import {
   TerraDrawSelectMode,
   TerraDrawPointMode,
   TerraDrawLineStringMode,
+  TerraDrawPolyLineMode,
   TerraDrawPolygonMode,
   TerraDrawCircleMode,
   TerraDrawFreehandMode,
@@ -55,6 +56,16 @@ export function setupDraw(map: maplibregl.Map) {
               },
             },
           },
+          polyline: {
+            feature: {
+              draggable: true,
+              coordinates: {
+                midpoints: true,
+                draggable: true,
+                deletable: true,
+              },
+            },
+          },
           circle: {
             feature: {
               draggable: true,
@@ -82,6 +93,16 @@ export function setupDraw(map: maplibregl.Map) {
       }),
       new TerraDrawPointMode(),
       new TerraDrawLineStringMode({
+        validation: (feature, { updateType }) => {
+          if (updateType === "finish" || updateType === "commit") {
+            return ValidateNotSelfIntersecting(feature);
+          }
+          return {
+            valid: true
+          }
+        }
+      }),
+      new TerraDrawPolyLineMode({
         validation: (feature, { updateType }) => {
           if (updateType === "finish" || updateType === "commit") {
             return ValidateNotSelfIntersecting(feature);
