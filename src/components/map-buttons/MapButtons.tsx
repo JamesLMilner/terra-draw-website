@@ -12,6 +12,8 @@ const MapButtons = ({
   changeMode,
   action,
   changeAction,
+  canUndo,
+  canRedo,
   draw,
   clearLocalStorage,
   setFeatures,
@@ -21,6 +23,8 @@ const MapButtons = ({
   changeMode: (mode: string) => void;
   action?: string;
   changeAction?: (action: string) => void;
+  canUndo: boolean;
+  canRedo: boolean;
   draw: TerraDraw;
   clearLocalStorage: () => void;
   setFeatures: (features: GeoJSONStoreFeatures[]) => void;
@@ -36,6 +40,7 @@ const MapButtons = ({
           changeAction={changeAction as () => void}
           title="Undo"
           ariaLabel="Undo"
+          disabled={!canUndo}
           label={<Undo2 size={16} aria-hidden={true} />}
         />
         <MapActionButton
@@ -44,6 +49,7 @@ const MapButtons = ({
           changeAction={changeAction as () => void}
           title="Redo"
           ariaLabel="Redo"
+          disabled={!canRedo}
           label={<Redo2 size={16} aria-hidden={true} />}
         />
         <ClearButton

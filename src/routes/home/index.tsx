@@ -26,6 +26,8 @@ const Home = () => {
   const [map, setMap] = useState<undefined | maplibregl.Map>();
   const [mode, setMode] = useState<string>("static");
   const [action, setAction] = useState<string>("");
+  const [canUndo, setCanUndo] = useState<boolean>(false);
+  const [canRedo, setCanRedo] = useState<boolean>(false);
 
   const [expanded, setExpanded] = useState<boolean>(true);
   const [selected, setSelected] = useState<GeoJSONStoreFeatures | undefined>();
@@ -85,6 +87,9 @@ const Home = () => {
         } else {
           return null;
         }
+
+        setCanUndo(draw.canUndo());
+        setCanRedo(draw.canRedo());
       }
     },
     [draw],
@@ -109,12 +114,20 @@ const Home = () => {
 
   useEffect(() => {
     if (draw) {
-      draw.on("change", () => {
+      const syncUndoRedoState = () => {
+        setCanUndo(draw.canUndo());
+        setCanRedo(draw.canRedo());
+      };
+
+      const handleChange = () => {
         const snapshot = draw.getSnapshot();
         setFeatures(snapshot);
         setSelected(snapshot.find((f) => f.properties.selected));
         setLocalStorage(stripSnapshot(snapshot));
-      });
+      };
+
+      draw.on("change", handleChange);
+      draw.on("history", syncUndoRedoState);
 
       const snapshot = getLocalStorage();
       if (snapshot) {
@@ -123,6 +136,13 @@ const Home = () => {
         // console.log("clearUndoRedoHistory", parsed);
         draw.clearUndoRedoHistory();
       }
+
+      syncUndoRedoState();
+
+      return () => {
+        draw.off("change", handleChange);
+        draw.off("history", syncUndoRedoState);
+      };
     }
   }, [getLocalStorage, setLocalStorage, draw]);
 
@@ -135,6 +155,8 @@ const Home = () => {
             changeMode={changeMode}
             action={action}
             changeAction={changeAction}
+            canUndo={canUndo}
+            canRedo={canRedo}
             draw={draw}
             clearLocalStorage={clearLocalStorage}
             setFeatures={setFeatures}
