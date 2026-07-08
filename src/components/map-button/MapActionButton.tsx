@@ -8,6 +8,7 @@ const MapActionButton = ({
   label,
   ariaLabel,
   title,
+  disabled,
   hiddenOnTouch,
 }: {
   action: string;
@@ -16,6 +17,7 @@ const MapActionButton = ({
   label?: ComponentChildren;
   ariaLabel?: string;
   title?: string;
+  disabled?: boolean;
   hiddenOnTouch?: boolean;
 }) => {
   let classes = `${style.button} ${style.actionButton}`;
@@ -30,6 +32,7 @@ const MapActionButton = ({
       class={classes}
       title={title ?? titleCase(action)}
       aria-label={ariaLabel ?? titleCase(action)}
+      disabled={disabled}
       onClick={() => {
         changeAction(action);
       }}
