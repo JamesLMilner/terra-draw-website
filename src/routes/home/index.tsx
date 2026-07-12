@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useRef, useEffect, useState, useCallback } from "preact/hooks";
 import maplibregl from "maplibre-gl";
-import { GeoJSONStoreFeatures } from "terra-draw";
+import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 import { setupDraw } from "./setup-draw";
 import { setupMaplibreMap } from "./setup-maplibre";
 import InfoTab from "../../components/info-tab/InfoTab";
