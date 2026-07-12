@@ -10,10 +10,11 @@ export function useDownloadFlatGeobuf() {
         // const data = JSON.stringify(json, null, 4);
 
         const data = serialize(json);
+        const blobData = Uint8Array.from(data);
 
         // Pass the string to a Blob and turn it
         // into an ObjectURL
-        const blob = new Blob([data], { type: "octet/stream" });
+        const blob = new Blob([blobData], { type: "octet/stream" });
         const jsonObjectUrl = URL.createObjectURL(blob);
 
         // Create an anchor element, set it's
