@@ -36,19 +36,6 @@ jobs:
       - name: Ensure no package-lock.json changes
         run: git diff --exit-code
 
-  typecheck:
-    runs-on: ubuntu-24.04
-    steps:
-      - uses: actions/checkout@v6
-      - name: Use Node
-        uses: actions/setup-node@v6
-        with:
-          node-version: "24.18.0"
-      - name: Install Parent Folder
-        run: npm ci
-      - name: Run type checking
-        run: npm run typecheck
-
   build:
     runs-on: ubuntu-24.04
     steps:

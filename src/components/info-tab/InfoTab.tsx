@@ -3,7 +3,7 @@ import style from "./style.module.css";
 import { formatDateTime } from "../../utils/dates";
 import { area, length } from "../../utils/geo";
 import { useMemo, useState } from "preact/hooks";
-import { GeoJSONStoreFeatures } from "terra-draw";
+import { GeoJSONStoreFeatures } from "terra-draw/dist/store/store";
 
 const LARGE_AREA_M2_THRESHOLD = 1_000_000;
 
