@@ -14,14 +14,15 @@
 .header .nav {
   width: 100%;
   display: flex;
+  align-items: center;
 }
 
 .github {
   display: flex;
   justify-items: center;
   align-items: center;
-  gap: 10px;
-  margin-right: 20px;
+  gap: 12px;
+  margin-right: 24px;
 }
 
 .github a {
@@ -64,8 +65,21 @@
 
 @media screen and (max-width: 900px) {
   .logo {
-    height: 28px;
+    height: 24px;
     padding-left: 14px;
+  }
+
+  .homeLink,
+  .apiLink {
+    font-size: 14px;
+  }
+
+  .navDivider {
+    display: none !important;
+  }
+
+  .externalLink {
+    display: none !important;
   }
 }
 
@@ -82,13 +96,18 @@
 .header nav {
   font-size: 100%;
   margin-left: 20px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
 }
 
 .header nav a {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   height: 70px;
   line-height: 70px;
-  padding: 0 15px;
+  padding: 0 14px;
   min-width: 50px;
   text-align: center;
   background: fdfdfd;
@@ -106,19 +125,58 @@
   border-bottom: solid 5px #00d088;
 }
 
+.header nav .navDivider {
+  width: 1px;
+  height: 30px;
+  margin: 0 4px 0 8px;
+  background: #d6dde4;
+}
+
+.header nav .externalLink {
+  height: 42px;
+  margin-left: 6px;
+  padding: 0 14px;
+  border-radius: 999px;
+  border: 1px solid #b8ccd9;
+  background: #f3f8fc;
+  color: #1d4f73;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  text-decoration: none;
+  transition:
+    border-color 0.16s ease,
+    background-color 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease;
+}
+
+.header nav .externalLink:hover,
+.header nav .externalLink:active {
+  border-bottom: 1px solid #1d4f73;
+  border-color: #1d4f73;
+  background: #e5f2fb;
+  color: #123a55;
+  transform: translateY(-1px);
+}
+
 @media screen and (max-width: 500px) {
   .logo {
-    height: 24px;
+    height: 20px;
     padding-left: 10px;
   }
 
   .sponsorButton,
   .homeLink,
-  .apiLink {
+  .apiLink,
+  .navDivider,
+  .externalLink {
     display: none !important;
   }
 
   .header nav {
-    margin-left: 0px;
+    margin-left: 4px;
   }
 }

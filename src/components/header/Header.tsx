@@ -3,7 +3,7 @@ import { Link } from "preact-router/match";
 import style from "./style.module.css";
 import logo from "../../assets/imgs/logo.png";
 import github from "../../assets/imgs/github.png";
-import { Heart } from "lucide-preact";
+import { ExternalLink, Heart } from "lucide-preact";
 
 const Header = () => (
   <header class={style.header}>
@@ -16,6 +16,18 @@ const Header = () => (
         <Link class={style.apiLink} activeClassName={style.active} href="/api">
           API Docs
         </Link>
+        <span class={style.navDivider} aria-hidden={true} />
+        <a
+          class={style.externalLink}
+          href="https://github.com/JamesLMilner/terra-draw/blob/main/guides/1.GETTING_STARTED.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Getting Started guide (opens in new tab)"
+          aria-label="Getting Started guide (opens in new tab)"
+        >
+          <span>Getting Started</span>
+          <ExternalLink size={14} strokeWidth={2.25} aria-hidden={true} />
+        </a>
       </nav>
     </div>
     <div class={style.github}>
