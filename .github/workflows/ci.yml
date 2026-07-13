@@ -64,6 +64,6 @@ jobs:
       - name: Build
         run: npm run build
       - name: Production Build Smoke Test
-        run: npm run test:build
+        run: npm test
 
  
