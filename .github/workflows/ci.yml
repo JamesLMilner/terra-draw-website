@@ -59,7 +59,11 @@ jobs:
           node-version: "24.18.0"
       - name: Install Parent Folder
         run: npm ci
+      - name: Install Playwright Browser
+        run: npx playwright install --with-deps chromium
       - name: Build
         run: npm run build
+      - name: Production Build Smoke Test
+        run: npm run test:build
 
  
