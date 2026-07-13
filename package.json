@@ -32,7 +32,7 @@
     "preact-render-to-string": "^6.7.0",
     "preact-router": "^4.1.2",
     "terra-draw": "1.31.0",
-    "terra-draw-maplibre-gl-adapter": "1.4.0"
+    "terra-draw-maplibre-gl-adapter": "1.4.1"
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.5",
@@ -41,6 +41,6 @@
     "eslint": "^10.7.0",
     "globals": "^17.7.0",
     "typescript": "^6.0.3",
-    "vite": "^8.1.4"
+    "vite": "^7.3.6"
   }
 }
