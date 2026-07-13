@@ -6,7 +6,8 @@
     "dev": "vite",
     "typecheck": "tsc --noEmit",
     "build": "vite build && echo 'terradraw.io' > docs/CNAME",
-    "lint": "eslint src"
+    "lint": "eslint src",
+    "test": "playwright test --config=playwright.config.ts"
   },
   "eslintConfig": {
     "parser": "@typescript-eslint/parser",
@@ -36,6 +37,7 @@
   },
   "devDependencies": {
     "@preact/preset-vite": "^2.10.5",
+    "@playwright/test": "^1.54.2",
     "@typescript-eslint/eslint-plugin": "^8.63.0",
     "@typescript-eslint/parser": "^8.63.0",
     "eslint": "^10.7.0",

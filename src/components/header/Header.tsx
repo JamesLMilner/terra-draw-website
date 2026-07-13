@@ -8,7 +8,7 @@ import { Heart } from "lucide-preact";
 const Header = () => (
   <header class={style.header}>
     <div class={style.nav}>
-      <img class={style.logo} src={logo} />
+      <img class={style.logo} src={logo} alt="Terra Draw Logo" />
       <nav>
         <Link class={style.homeLink} activeClassName={style.active} href="/">
           Home
@@ -24,7 +24,7 @@ const Header = () => (
         title="View on GitHub"
         aria-label="View on GitHub"
       >
-        <img src={github} />
+        <img src={github} alt="GitHub Logo" />
       </a>
       <a
         class={style.sponsorButton}
