@@ -17,9 +17,9 @@ import {
 
 import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter";
 
-import maplibregl from "maplibre-gl";
+import { Map } from "maplibre-gl";
 
-export function setupDraw(map: maplibregl.Map) {
+export function setupDraw(map: Map) {
   return new TerraDraw({
     tracked: true,
     adapter: new TerraDrawMapLibreGLAdapter({

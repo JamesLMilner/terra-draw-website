@@ -1,4 +1,4 @@
-import maplibregl from "maplibre-gl";
+import { Map, getRTLTextPluginStatus, setRTLTextPlugin } from "maplibre-gl";
 
 export function setupMaplibreMap({
   id,
@@ -11,15 +11,15 @@ export function setupMaplibreMap({
   lng: number;
   zoom: number;
 }) {
-  if (maplibregl.getRTLTextPluginStatus() === "unavailable") {
-    maplibregl.setRTLTextPlugin(
+  if (getRTLTextPluginStatus() === "unavailable") {
+    setRTLTextPlugin(
       "https://unpkg.com/@mapbox/mapbox-gl-rtl-text@0.2.3/mapbox-gl-rtl-text.min.js",
       true,
     );
   }
 
   const PROTOMAPS_API_KEY = "d23c43b7c56e123d";
-  return new maplibregl.Map({
+  return new Map({
     container: id,
     style: `https://api.protomaps.com/styles/v3/white.json?key=${PROTOMAPS_API_KEY}`,
     center: { lat, lng },
