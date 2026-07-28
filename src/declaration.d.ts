@@ -21,3 +21,8 @@ declare module "preact-router/match" {
     props: LinkProps & preact.JSX.AnchorHTMLAttributes<HTMLAnchorElement>
   ): preact.VNode;
 }
+
+declare module '*?worker&url' {
+  const workerUrl: string;
+  export default workerUrl;
+}

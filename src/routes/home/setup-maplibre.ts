@@ -1,4 +1,8 @@
-import { Map, getRTLTextPluginStatus, setRTLTextPlugin } from "maplibre-gl";
+import { Map, getRTLTextPluginStatus, setRTLTextPlugin, setWorkerUrl } from "maplibre-gl";
+
+import workerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?worker&url';
+
+setWorkerUrl(workerUrl);
 
 export function setupMaplibreMap({
   id,
