@@ -2,7 +2,7 @@ import { h } from "preact";
 import style from "./style.module.css";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { useRef, useEffect, useState, useCallback } from "preact/hooks";
-import { Map } from "maplibre-gl";
+import maplibregl from "maplibre-gl";
 import { GeoJSONStoreFeatures } from "terra-draw";
 import { setupDraw } from "./setup-draw";
 import { setupMaplibreMap } from "./setup-maplibre";
@@ -23,7 +23,7 @@ const mapOptions = {
 
 const Home = () => {
   const ref = useRef(null);
-  const [map, setMap] = useState<undefined | Map>();
+  const [map, setMap] = useState<undefined | maplibregl.Map>();
   const [mode, setMode] = useState<string>("static");
   const [action, setAction] = useState<string>("");
   const [canUndo, setCanUndo] = useState<boolean>(false);
