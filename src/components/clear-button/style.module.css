@@ -3,13 +3,13 @@
   min-height: 38px;
   font-family: "Funnel Display", sans-serif;
   letter-spacing: 0.01em;
-  background: #ffffff;
-  border: solid 1px #d4dde6;
+  background: var(--color-map-control-surface);
+  border: solid 1px var(--color-map-control-border);
   cursor: pointer !important;
   border-radius: 10px;
   font-weight: 700;
   font-size: 14px;
-  color: #3d4854;
+  color: var(--color-button-text);
   margin: 4px;
   margin-top: 7px;
   display: flex;
@@ -26,14 +26,14 @@
 
 .button:hover {
   border-color: #00d088;
-  background: #f8fffc;
+  background: var(--color-surface-subtle);
   box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.65);
 }
 
 .button:focus-visible {
   outline: none;
   border-color: #00d088;
-  background: #f8fffc;
+  background: var(--color-surface-subtle);
   box-shadow: inset 0 0 0 1px rgba(0, 208, 136, 0.75);
 }
 

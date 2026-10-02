@@ -3,11 +3,11 @@
   width: 100%;
   flex-grow: 1;
   min-height: 0;
-  border: 1px solid #d4dde6;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 12px;
-  color: #334155;
-  background: #ffffff;
+  color: var(--color-text);
+  background: var(--color-surface);
   /** accomidate the 3px margin top for the download button **/
 }
 
@@ -18,14 +18,14 @@
   min-height: 0;
   flex-direction: column;
   gap: 10px;
-  background: #f8fafc;
+  background: var(--color-surface-muted);
 }
 
 .geojsonSection,
 .exportSection {
-  border: 1px solid #e0e7ef;
+  border: 1px solid var(--color-border-muted);
   border-radius: 12px;
-  background: #ffffff;
+  background: var(--color-surface);
   padding: 10px;
 }
 
@@ -78,11 +78,11 @@
 }
 
 .formatSelect {
-  border: 1px solid #d4dde6;
+  border: 1px solid var(--color-border);
   border-radius: 10px;
   padding: 8px 10px;
-  background: #ffffff;
-  color: #334155;
+  background: var(--color-surface);
+  color: var(--color-text);
   min-height: 38px;
   min-width: 150px;
 }
@@ -103,7 +103,7 @@
 
 .formatLabel {
   font-size: 13px;
-  color: #5b6b7b;
+  color: var(--color-text-muted);
   font-weight: 600;
 }
 
@@ -111,7 +111,7 @@
   font-size: 12px;
   letter-spacing: 0.03em;
   text-transform: uppercase;
-  color: #64748b;
+  color: var(--color-text-subtle);
   font-weight: 700;
   margin-bottom: 8px;
 }

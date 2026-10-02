@@ -2,11 +2,11 @@
   width: 100%;
   height: 70px;
   padding: 0;
-  background: #fdfdfd;
+  background: var(--color-header-bg);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
   z-index: 50;
   display: flex;
-  color: #565656;
+  color: var(--color-header-text);
   display: flex;
   justify-content: space-between;
 }
@@ -34,9 +34,9 @@
   min-height: 34px;
   padding: 0 12px;
   border-radius: 10px;
-  border: 1px solid #d4dde6;
-  background: #ffffff;
-  color: #334155;
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  color: var(--color-text);
   font-weight: 700;
   text-decoration: none;
   gap: 6px;
@@ -52,8 +52,8 @@
 
 .sponsorButton:hover {
   border-color: #00d088;
-  background: #f8fffc;
-  color: #008a5b;
+  background: var(--color-surface-subtle);
+  color: var(--color-accent-text);
 }
 
 .logo {
@@ -90,7 +90,7 @@
   font-size: 24px;
   line-height: 70px;
   font-weight: 400;
-  color: #fdfdfd;
+  color: var(--color-header-bg);
 }
 
 .header nav {
@@ -110,9 +110,9 @@
   padding: 0 14px;
   min-width: 50px;
   text-align: center;
-  background: fdfdfd;
+  background: var(--color-header-bg);
   text-decoration: none;
-  color: #565656;
+  color: var(--color-header-text);
   will-change: background-color;
 }
 
@@ -129,7 +129,7 @@
   width: 1px;
   height: 30px;
   margin: 0 4px 0 8px;
-  background: #d6dde4;
+  background: var(--color-divider);
 }
 
 .header nav .externalLink {
@@ -137,9 +137,9 @@
   margin-left: 6px;
   padding: 0 14px;
   border-radius: 999px;
-  border: 1px solid #b8ccd9;
-  background: #f3f8fc;
-  color: #1d4f73;
+  border: 1px solid var(--color-border-blue);
+  background: var(--color-surface-blue);
+  color: var(--color-text-blue);
   line-height: 1;
   display: inline-flex;
   align-items: center;
@@ -155,10 +155,10 @@
 
 .header nav .externalLink:hover,
 .header nav .externalLink:active {
-  border-bottom: 1px solid #1d4f73;
-  border-color: #1d4f73;
-  background: #e5f2fb;
-  color: #123a55;
+  border-bottom: 1px solid var(--color-text-blue);
+  border-color: var(--color-text-blue);
+  background: var(--color-surface-blue-hover);
+  color: var(--color-text-blue-strong);
   transform: translateY(-1px);
 }
 
@@ -178,5 +178,15 @@
 
   .header nav {
     margin-left: 4px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .logo {
+    filter: invert(1) hue-rotate(180deg);
+  }
+
+  .github img {
+    filter: brightness(0) invert(1);
   }
 }

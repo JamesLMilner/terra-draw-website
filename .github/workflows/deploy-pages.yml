@@ -7,26 +7,25 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
 
 concurrency:
-  group: deploy-pages
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-24.04
-
     steps:
-      - name: Checkout main
+      - name: Checkout
         uses: actions/checkout@v6
-        with:
-          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "24.14.1"
+          node-version: "24.18.0"
           cache: npm
 
       - name: Install dependencies
@@ -35,30 +34,21 @@ jobs:
       - name: Build site
         run: npm run build
 
-      - name: Publish docs to gh-pages/docs
-        run: |
-          set -euo pipefail
+      - name: Setup Pages
+        uses: actions/configure-pages@v6
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: docs
 
-          # gh-pages branch is expected to exist.
-          git fetch origin gh-pages:gh-pages
-
-          rm -rf /tmp/gh-pages
-
-          git worktree add /tmp/gh-pages gh-pages
-
-          rm -rf /tmp/gh-pages/docs
-          rsync -a docs/ /tmp/gh-pages/docs/
-
-          cd /tmp/gh-pages
-          git add -A docs
-
-          if git diff --cached --quiet; then
-            echo "No changes to deploy"
-            exit 0
-          fi
-
-          git commit -m "Deploy docs from ${GITHUB_SHA}"
-          git push origin gh-pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

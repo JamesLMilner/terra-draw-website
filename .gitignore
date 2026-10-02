@@ -5,3 +5,4 @@ node_modules
 /docs
 test-results/
 playwright-report/
+.DS_Store

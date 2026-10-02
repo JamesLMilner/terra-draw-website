@@ -1,0 +1,80 @@
+/*
+ * Theme tokens.
+ *
+ * A single source of truth for the palette, keyed by role. Each token is a
+ * `light-dark()` pair so the browser resolves the correct value from the OS /
+ * `prefers-color-scheme` setting with no JavaScript and no UI toggle.
+ *
+ * `color-scheme: light dark` opts the document into native dark affordances
+ * (form controls, scrollbars, etc.) and is what enables `light-dark()`.
+ *
+ * Module CSS keeps structural rules and references these tokens with
+ * `var(--color-*)`; literals that are theme-neutral (brand accents, shadows)
+ * stay inline.
+ */
+:root {
+  color-scheme: light dark;
+
+  --color-page-bg: light-dark(#fafafa, #101315);
+  --color-page-text: light-dark(#444, #d8dde2);
+  --color-header-bg: light-dark(#fdfdfd, #14181b);
+  --color-header-text: light-dark(#565656, #c2c9cf);
+  --color-surface: light-dark(#ffffff, #1b2024);
+  --color-surface-subtle: light-dark(#f8fffc, #132019);
+  --color-text: light-dark(#334155, #cbd5e1);
+  --color-accent-text: light-dark(#008a5b, #3ddc97);
+  --color-border: light-dark(#d4dde6, #2e363d);
+  --color-divider: light-dark(#d6dde4, #2e363d);
+  --color-border-blue: light-dark(#b8ccd9, #2c4a63);
+  --color-surface-blue: light-dark(#f3f8fc, #16222e);
+  --color-surface-blue-hover: light-dark(#e5f2fb, #1b2c3b);
+  --color-text-blue: light-dark(#1d4f73, #8ec4ea);
+  --color-text-blue-strong: light-dark(#123a55, #a8d4f2);
+
+  /* neutral surfaces */
+  --color-surface-muted: light-dark(#f8fafc, #171b1f);
+  --color-surface-muted-hover: light-dark(#eef2f6, #21272c);
+  --color-surface-disabled: light-dark(#f5f7f9, #1d2226);
+  --color-surface-translucent: light-dark(#ffffffbd, #1b2024bd);
+  --color-surface-accent-active: light-dark(#effff8, #12201a);
+  --color-surface-selected: light-dark(#eff6ff, #172230);
+  --color-badge-bg: light-dark(#e2e8f0, #2a3138);
+  --color-badge-bg-blue: light-dark(#dbeafe, #1e2f45);
+
+  /* neutral + info borders */
+  --color-border-muted: light-dark(#e0e7ef, #2a3138);
+  --color-border-soft: light-dark(#dfe6ec, #303840);
+  --color-border-badge: light-dark(#dbe5ef, #2a3138);
+  --color-border-table: light-dark(#e2e8f0, #2a3138);
+  --color-border-row: light-dark(#edf2f7, #262d34);
+  --color-border-info: light-dark(#dbe7f5, #2c4a63);
+  --color-border-blue-soft: light-dark(#bfd7f2, #2c4a63);
+
+  /* map-control surfaces: map-overlay chrome is keyed to the basemap it sits
+     on, not the page background. The light values mirror the page-chrome
+     tokens above, so light mode is unchanged; the dark values are lifted
+     slate so the controls stay visible over the OpenFreeMap dark basemap. */
+  --color-map-control-surface: light-dark(#ffffff, #343a42);
+  --color-map-control-surface-translucent: light-dark(#ffffffbd, #2b343bbd);
+  --color-map-control-surface-disabled: light-dark(#f5f7f9, #1d2226);
+  --color-map-control-border: light-dark(#d4dde6, #61676f);
+  --color-map-control-border-soft: light-dark(#dfe6ec, #61676f);
+
+  /* text variants */
+  --color-tab-text: light-dark(#465564, #c6d0da);
+  --color-collapse-text: light-dark(#3d4b59, #c6d0da);
+  --color-button-text: light-dark(#3d4854, #cbd5e1);
+  --color-text-disabled: light-dark(#9ea7b1, #8b98a5);
+  --color-text-muted: light-dark(#5b6b7b, #9aa6b2);
+  --color-text-subtle: light-dark(#64748b, #8b98a5);
+  --color-text-label: light-dark(#475569, #b4c0cc);
+  --color-text-badge: light-dark(#0f172a, #e8edf2);
+  --color-text-cell: light-dark(#1e293b, #e2e8f0);
+  --color-text-info: light-dark(#1e3a5f, #a8d4f2);
+  --color-text-info-muted: light-dark(#30577f, #8ec4ea);
+  --color-accent-control: light-dark(#0f172a, #cbd5e1);
+
+  /* info panel gradient */
+  --color-gradient-info-start: light-dark(#f8fbff, #182634);
+  --color-gradient-info-end: light-dark(#f3f8ff, #131c26);
+}

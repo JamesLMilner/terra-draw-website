@@ -12,14 +12,14 @@
 }
 
 .section {
-  background-color: #ffffffbd;
+  background-color: var(--color-map-control-surface-translucent);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 0;
   padding: 2px 6px 6px;
-  border: 1px solid #dfe6ec;
+  border: 1px solid var(--color-map-control-border-soft);
   border-radius: 14px;
   box-shadow: none;
 }
