@@ -22,10 +22,9 @@ export function setupMaplibreMap({
     );
   }
 
-  const PROTOMAPS_API_KEY = "d23c43b7c56e123d";
   return new Map({
     container: id,
-    style: `https://api.protomaps.com/styles/v3/white.json?key=${PROTOMAPS_API_KEY}`,
+    style: "https://www.ogis.org/basemap/style-light.json",
     center: { lat, lng },
     zoom,
   });
